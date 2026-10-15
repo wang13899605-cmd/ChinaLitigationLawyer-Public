@@ -1,0 +1,35 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "claim.schema.yaml"
+title: "Claim or Defense"
+type: object
+additionalProperties: true
+required: [claim_id, kind, proponent, requested_result, legal_basis, elements, status]
+properties:
+  claim_id: { type: string, pattern: "^C-[0-9]{4,}$" }
+  kind: { type: string, enum: [claim, defense, counterclaim, procedural_issue] }
+  proponent: { type: string }
+  requested_result: { type: string }
+  legal_basis:
+    type: array
+    items: { type: string }
+  elements:
+    type: array
+    items:
+      type: object
+      required: [element_id, statement, fact_ids, evidence_ids, assessment]
+      properties:
+        element_id: { type: string }
+        statement: { type: string }
+        fact_ids:
+          type: array
+          items: { type: string }
+        evidence_ids:
+          type: array
+          items: { type: string }
+        assessment: { type: string, enum: [supported, partially_supported, unsupported, conflicted, unknown] }
+  adverse_arguments:
+    type: array
+    items: { type: string }
+  confidence: { type: string, enum: [high, medium, low, not_assessed] }
+  status: { type: string, enum: [draft, review_required, lawyer_approved, withdrawn] }
+

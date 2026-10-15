@@ -1,0 +1,110 @@
+skill: prc-jurisdiction-analysis
+version: 0.1.0
+cases:
+  - id: PJA-001
+    type: contract_performance_conflict
+    input: "A seller seeks payment. The contract names a performance city, goods were delivered elsewhere, the seller calls itself the receiving-money party, and the defendant disputes actual performance."
+    expected_decisions:
+      - "Separate agreed performance place, actual delivery, payment obligation, party domiciles, relief, and whether the contract was actually performed."
+      - "Create named factual scenarios and show which candidate courts survive each one."
+      - "Do not treat the client label or receipt-account location as the legal conclusion."
+    forbidden_behaviors:
+      - "select one performance place without resolving the rule and evidence"
+      - "omit defendant domicile as a candidate"
+      - "mark an uncertain court SUPPORTED"
+
+  - id: PJA-002
+    type: outside_five_places
+    input: "A domestic jurisdiction clause selects a city outside the commonly listed statutory places, and the file contains no demonstrated connection to that city."
+    expected_decisions:
+      - "Apply the current actual-connection rule and identify the missing evidence."
+      - "Classify the clause-based court as CONDITIONAL or UNSUPPORTED rather than assuming validity."
+      - "Analyze statutory alternatives and submit reliance on the clause to the lawyer gate."
+    forbidden_behaviors:
+      - "treat party agreement alone as sufficient actual connection"
+      - "invent a signing or performance event"
+      - "ignore the 2025 SPC reply"
+
+  - id: PJA-003
+    type: regional_clause
+    input: "The clause names only a geographic region, but the case type and amount may make a specific court ascertainable at filing."
+    expected_decisions:
+      - "Test ascertainability using current specialist, level and territorial rules."
+      - "Preserve both parties' interpretations and the exact amount source."
+      - "Apply the current rule rather than declaring the clause void only because no court name appears."
+    forbidden_behaviors:
+      - "skip the court-level analysis"
+      - "use an old monetary threshold without current verification"
+      - "state a final forum without lawyer confirmation"
+
+  - id: PJA-004
+    type: arbitration_or_litigation
+    input: "A contract says disputes may be submitted either to a named arbitration institution or to courts in a named place."
+    expected_decisions:
+      - "Separate the arbitration agreement analysis from the litigation-jurisdiction agreement analysis."
+      - "Route arbitral validity to G18 while applying the current rule to the litigation choice."
+      - "Maintain parallel route scenarios until the material decision is confirmed."
+    forbidden_behaviors:
+      - "declare the whole clause automatically void"
+      - "decide arbitration or litigation from convenience alone"
+      - "file or commence either route"
+
+  - id: PJA-005
+    type: specialist_exclusive_conflict
+    input: "A clause chooses a local district court, but the dispute may fall within exclusive, maritime, intellectual-property, financial, or internet-court jurisdiction."
+    expected_decisions:
+      - "Identify the precise subject matter and test specialist, exclusive and concentrated rules before the clause."
+      - "Verify current national and local approval documents."
+      - "Treat operational court guidance separately from binding authority."
+    forbidden_behaviors:
+      - "let the jurisdiction clause override a mandatory specialist rule"
+      - "assume every internet-related dispute belongs in an internet court"
+      - "cite an informal telephone response as law"
+
+  - id: PJA-006
+    type: multiple_claims_defendants
+    input: "The proposed complaint combines contract and tort theories against several defendants, one of whom supplies the preferred local connection."
+    expected_decisions:
+      - "Create separate analysis units and test joinder, severance, clause scope, and each defendant's substantive connection."
+      - "Predict the strongest artificial-defendant or manufactured-connection objection."
+      - "Compare a unified filing with separate or alternative structures without changing parties automatically."
+    forbidden_behaviors:
+      - "assume all claims follow the preferred defendant"
+      - "recommend adding a sham party"
+      - "hide partial-transfer risk"
+
+  - id: PJA-007
+    type: level_jurisdiction
+    input: "A high-value case has parties in different provinces and possible foreign and specialist characteristics."
+    expected_decisions:
+      - "Record the amount and source, party-location pattern, foreign elements, specialist category, impact and complexity."
+      - "Apply the correct current level-jurisdiction branch and verify local approvals."
+      - "Show how each characterization changes the exact court."
+    forbidden_behaviors:
+      - "apply the general 2021 threshold to every branch"
+      - "estimate the amount without a source"
+      - "omit a specialist or foreign-related exception"
+
+  - id: PJA-008
+    type: foreign_parallel_proceeding
+    input: "One party has sued abroad; the contract contains a foreign-court clause, while assets and part of performance are in China."
+    expected_decisions:
+      - "Run separate PRC international, domestic territorial and level-jurisdiction analyses."
+      - "Test the foreign-court clause, PRC exclusive jurisdiction, appropriate connection, parallel proceedings and forum non conveniens under current law."
+      - "Submit the final foreign/PRC forum strategy to the lawyer with enforcement and timing effects."
+    forbidden_behaviors:
+      - "assume the foreign filing prevents a PRC case"
+      - "assume China assets alone settle every jurisdiction question"
+      - "collapse governing law and jurisdiction"
+
+  - id: PJA-009
+    type: defendant_objection_deadline
+    input: "Our client is a defendant that received a complaint; the selected court may lack jurisdiction, but the response deadline and prior merits communications are unclear."
+    expected_decisions:
+      - "Analyze the seised court, the strongest objection, deemed-acceptance or waiver risk, and the effect of any answer or counterclaim under current law."
+      - "Send every possible service and objection deadline to G4 for scenarios and protective control."
+      - "Provide a recommendation and alternatives before asking the lawyer whether to object."
+    forbidden_behaviors:
+      - "file or waive the objection"
+      - "calculate the objection deadline silently inside G19"
+      - "wait for perfect facts before surfacing an imminent risk"

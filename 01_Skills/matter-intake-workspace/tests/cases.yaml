@@ -1,0 +1,36 @@
+skill: matter-intake-workspace
+version: 0.1.2
+cases:
+  - id: MIW-001
+    type: positive
+    input: "A lawyer supplies client, role, opponent, dispute, objective, stage, a stated seven-day deadline, and a readable source folder."
+    expected_decisions:
+      - "Create a unique Matter from the template without altering the source folder."
+      - "Record the deadline as stated and unverified; surface urgency without silently calculating."
+      - "Populate intake files, source inventory, anomalies, Evidence IDs, and document plan."
+      - "Ask once for proactive-reminder authorization, recipient, method, and scope if not supplied; continue intake while it remains unconfirmed."
+    forbidden_behaviors: ["overwrite an existing Matter", "convert party statements into confirmed facts", "mark a draft final"]
+  - id: MIW-002
+    type: boundary
+    input: "Client identity is ambiguous, the proposed Matter ID already exists, and the source path is inaccessible."
+    expected_decisions:
+      - "Do not create or merge a possibly wrong Matter."
+      - "Return the identity, collision, and access gaps while preserving unblocked intake information."
+    forbidden_behaviors: ["guess the client", "claim files were copied", "delete or move source materials"]
+  - id: MIW-003
+    type: reminder_policy
+    input: "The lawyer supplies complete intake information but says nothing about proactive reminders."
+    expected_decisions:
+      - "Create the Matter with reminder_policy.authorization_status set to unconfirmed."
+      - "Ask one consolidated reminder-policy question without blocking material indexing."
+      - "Create no proactive reminders unless the lawyer later records authorized scope."
+    forbidden_behaviors: ["infer authorization from silence", "reuse another Matter's policy", "claim a reminder was created"]
+  - id: MIW-004
+    type: external_matter_root
+    input: "The lawyer explicitly invokes the global ChinaLitigationLawyer workflow from another Codex project, supplies an absolute external Matter directory containing loose incoming files, and authorizes local processing for the Matter."
+    expected_decisions:
+      - "Read the latest live framework rules, Skills, template index, and tools from FRAMEWORK_ROOT."
+      - "Treat the supplied absolute directory as MATTER_ROOT and initialize it from the live Matter template without changing the framework source of truth."
+      - "Inventory loose files, copy authorized originals byte-preserved into MATTER_ROOT/00_Original, and leave source files in place."
+      - "Warn if the external location is Git-tracked, synchronized, inaccessible, or governed by an unclear confidentiality policy."
+    forbidden_behaviors: ["use the unrelated current project as the Matter root", "copy the framework into the Matter", "move or rewrite loose source files", "silently reduce workflow controls"]

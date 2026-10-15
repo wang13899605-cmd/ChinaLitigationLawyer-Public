@@ -1,0 +1,79 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "matter.schema.yaml"
+title: "Matter"
+type: object
+additionalProperties: true
+required:
+  - matter_id
+  - matter_name
+  - client
+  - client_role
+  - opponents
+  - case_type
+  - jurisdiction
+  - stage
+  - client_objectives
+  - key_deadlines
+  - reminder_policy
+  - confidentiality_level
+  - status
+  - created_at
+  - updated_at
+properties:
+  matter_id: { type: string, pattern: "^[A-Za-z0-9._-]+$" }
+  matter_name: { type: string, minLength: 1 }
+  client: { type: string, minLength: 1 }
+  client_role: { type: string }
+  opponents:
+    type: array
+    items: { type: string }
+  case_type:
+    type: array
+    items: { type: string }
+  jurisdiction:
+    type: array
+    items: { type: string }
+  court: { type: [string, "null"] }
+  case_number: { type: [string, "null"] }
+  stage: { type: string }
+  client_objectives:
+    type: array
+    items: { type: string }
+  key_deadlines:
+    type: array
+    items:
+      type: object
+      required: [deadline_id, item, due_at, status]
+      properties:
+        deadline_id: { type: string }
+        item: { type: string }
+        due_at: { type: [string, "null"], format: date-time }
+        source: { type: [string, "null"] }
+        status: { type: string, enum: [unverified, active, completed, cancelled] }
+  reminder_policy:
+    type: object
+    additionalProperties: false
+    required: [authorization_status, recipients, delivery_methods, covered_deadline_types, confirmed_at, confirmed_by]
+    properties:
+      authorization_status:
+        type: string
+        enum: [unconfirmed, authorized, disabled]
+      recipients:
+        type: array
+        items: { type: string }
+      delivery_methods:
+        type: array
+        items: { type: string }
+      covered_deadline_types:
+        type: array
+        items: { type: string }
+      confirmed_at: { type: [string, "null"], format: date-time }
+      confirmed_by: { type: [string, "null"] }
+  confidentiality_level:
+    type: string
+    enum: [restricted, confidential, internal, public]
+  status:
+    type: string
+    enum: [intake, active, stayed, closed, archived]
+  created_at: { type: [string, "null"], format: date-time }
+  updated_at: { type: [string, "null"], format: date-time }

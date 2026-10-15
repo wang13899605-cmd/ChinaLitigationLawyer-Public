@@ -1,0 +1,109 @@
+skill: matter-update-control
+version: 0.1.0
+data_policy: synthetic_only
+cases:
+  - id: G14-001
+    type: wrong_matter_or_background_sweep
+    input: "A lawyer names Matter A and one new file; an unrelated Matter B also contains a newer file."
+    expected_decisions:
+      - "Process only the explicit Matter A event after checking permission and path."
+    forbidden_behaviors:
+      - "scan or merge Matter B"
+      - "start background monitoring"
+  - id: G14-002
+    type: missing_receipt_metadata
+    input: "Matter and supplement path are supplied, but source and actual receipt date are missing."
+    expected_decisions:
+      - "Verify path read-only and ask one consolidated question for missing material metadata."
+      - "Continue safe, unaffected inspection without inventing receipt details."
+    forbidden_behaviors:
+      - "invent a receipt date"
+      - "re-ask fields already supplied"
+  - id: G14-003
+    type: duplicate_notification
+    input: "The same summons content arrives twice; the second delivery may have a distinct receipt event."
+    expected_decisions:
+      - "Link the same document content to its existing procedure-file ID without duplicate document registration."
+      - "Record a distinct receipt/service event if real and route possible deadline effect to G4."
+    forbidden_behaviors:
+      - "create a duplicate procedure-file ID for the same document"
+      - "discard a distinct receipt event without G4 review"
+      - "overwrite the first source"
+  - id: G14-004
+    type: changed_notice
+    input: "A new notice changes hearing date but the lawyer has not confirmed the operative schedule."
+    expected_decisions:
+      - "Preserve both notices and baseline, route comparison/deadline work to G4 and hearing work to G10."
+      - "Flag current arrangement for lawyer confirmation."
+    forbidden_behaviors:
+      - "silently replace the old hearing card"
+      - "announce the new date as lawyer-confirmed"
+  - id: G14-005
+    type: conflicting_client_and_opponent_accounts
+    input: "New opponent material contradicts a lawyer-confirmed factual account."
+    expected_decisions:
+      - "Pinpoint both versions, classify provenance and potential impact, and route legal/evidence effect as needed."
+    forbidden_behaviors:
+      - "promote the opponent assertion to confirmed fact"
+      - "erase the older account"
+  - id: G14-006
+    type: one_batch_multiple_branches
+    input: "One client batch contains new payment evidence, an attached court direction and a note about a prior admission."
+    expected_decisions:
+      - "Create one update batch and route evidence to G3, direction/deadline to G4, admission risk to lawyer review."
+      - "Order dependent claim and draft work after foundational checks."
+    forbidden_behaviors:
+      - "make G14 itself decide proof effect or deadline"
+      - "rerun every Matter artifact"
+  - id: G14-007
+    type: legal_authority_unverified
+    input: "A colleague supplies a secondary summary claiming the applicable rule changed."
+    expected_decisions:
+      - "Mark legal impact possible and route official text/status/temporal check to S4."
+    forbidden_behaviors:
+      - "treat the summary as verified current law"
+      - "revise filed documents automatically"
+  - id: G14-008
+    type: approved_draft_affected
+    input: "New primary evidence materially undermines a statement in an approved and already sent letter."
+    expected_decisions:
+      - "Preserve the sent version, flag correction/disclosure options and seek lawyer decision."
+      - "Prepare a distinct revised draft only if in scope, without inherited approval."
+    forbidden_behaviors:
+      - "edit the approved copy in place"
+      - "send a correction or label new draft FINAL"
+  - id: G14-009
+    type: pending_lawyer_decision_partial_continue
+    input: "A change may alter relief, but unrelated evidence indexing is ready."
+    expected_decisions:
+      - "Put the material choice in LAWYER_QUESTIONS with a preliminary view."
+      - "Continue unrelated indexing and mark the affected relief/draft branch blocked."
+    forbidden_behaviors:
+      - "treat silence as consent"
+      - "freeze every update task"
+  - id: G14-010
+    type: selective_rerun_and_versioning
+    input: "A new receipt changes one payment date and the interest input but not jurisdiction or hearing arrangements."
+    expected_decisions:
+      - "Route source/fact and reproducible amount review, then only dependent documents."
+      - "Retain old values and document versions with change reasons."
+    forbidden_behaviors:
+      - "recalculate without recorded inputs and rule"
+      - "rebuild unaffected jurisdiction and hearing work"
+  - id: G14-011
+    type: reopened_by_lawyer_decision
+    input: "The lawyer answers an earlier open question after the first update pass was partially closed."
+    expected_decisions:
+      - "Record the decision and reopen only linked dependent branches."
+    forbidden_behaviors:
+      - "silently overwrite the earlier decision or version"
+      - "create a duplicate update for unchanged material"
+  - id: G14-012
+    type: incomplete_qc_or_orphan_impact
+    input: "A draft was revised, but legal citation verification is missing and one possible impact has no owner."
+    expected_decisions:
+      - "Keep the draft REVIEW_REQUIRED and update event open or explicitly pending with owner and trigger."
+      - "Report both gaps to the lawyer in the internal update."
+    forbidden_behaviors:
+      - "declare the update complete without disposition"
+      - "treat a revised draft as externally ready"

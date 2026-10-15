@@ -1,0 +1,9 @@
+schema_version: "0.1.0"
+matter_id: null
+updated_at: null
+output_status: AI_DRAFT
+candidates: []
+
+# 每个candidate至少记录：candidate_id、提出方、相对方、类型、法律关系、目标效果、
+# 法律依据及效力/时间状态、要件树、前置条件、责任主体、救济候选、S3矩阵引用、
+# 对方最强路径、致命要件、补救/回退、G4/G16/G19依赖、分类、理由、重启条件和律师门槛。

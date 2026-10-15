@@ -1,0 +1,12 @@
+schema_version: "0.1.0"
+matter_id: null
+updated_at: null
+output_status: "AI_DRAFT"
+deadlines: []
+
+# 每一 deadline 记录至少包括：
+# deadline_id, item, deadline_type, risk_class, rule, factual_trigger,
+# legal_trigger, length, unit, count_rule, calendar_rule, formula,
+# official_due_at, protective_due_at, internal_due_at, scenarios,
+# owner, reviewer, verification, reminder_status, completion_status,
+# completion_proof, source_versions, operational_status, output_status。

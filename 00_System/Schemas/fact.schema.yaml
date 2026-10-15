@@ -1,0 +1,28 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "fact.schema.yaml"
+title: "Fact"
+type: object
+additionalProperties: true
+required: [fact_id, statement, status, evidence_ids, source_location, materiality]
+properties:
+  fact_id: { type: string, pattern: "^F-[0-9]{4,}$" }
+  statement: { type: string, minLength: 1 }
+  status:
+    type: string
+    enum: [CONFIRMED_FACT, LAWYER_CONFIRMED_FACT, PARTY_ALLEGATION, AI_INFERENCE, UNKNOWN, CONFLICTED]
+  date: { type: [string, "null"], description: "ISO date/date-time or null when unknown" }
+  actors:
+    type: array
+    items: { type: string }
+  evidence_ids:
+    type: array
+    items: { type: string, pattern: "^E-[0-9]{4,}$" }
+  source_location:
+    type: array
+    items: { type: string }
+  materiality:
+    type: string
+    enum: [critical, high, medium, low]
+  notes: { type: [string, "null"] }
+  updated_at: { type: [string, "null"], format: date-time }
+

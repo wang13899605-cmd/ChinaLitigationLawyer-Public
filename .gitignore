@@ -1,0 +1,129 @@
+# Real matters: never track by default
+08_Cases/*
+!08_Cases/README.md
+!08_Cases/_MATTER_TEMPLATE/
+!08_Cases/_MATTER_TEMPLATE/**
+
+# Private or potentially identifying working content
+03_Private_Knowledge/playbooks/*
+!03_Private_Knowledge/playbooks/.gitkeep
+03_Private_Knowledge/strategy_notes/*
+!03_Private_Knowledge/strategy_notes/.gitkeep
+03_Private_Knowledge/issue_notes/*
+!03_Private_Knowledge/issue_notes/.gitkeep
+03_Private_Knowledge/industry_knowledge/*
+!03_Private_Knowledge/industry_knowledge/.gitkeep
+04_Experience/pending_review/*
+!04_Experience/pending_review/.gitkeep
+04_Experience/validated/*
+!04_Experience/validated/.gitkeep
+05_Templates/complaint/*
+!05_Templates/complaint/.gitkeep
+05_Templates/defense/*
+!05_Templates/defense/.gitkeep
+05_Templates/evidence/*
+!05_Templates/evidence/.gitkeep
+05_Templates/preservation/*
+!05_Templates/preservation/.gitkeep
+05_Templates/hearing/*
+!05_Templates/hearing/.gitkeep
+05_Templates/legal_authority/*
+!05_Templates/legal_authority/.gitkeep
+05_Templates/legal_research/*
+!05_Templates/legal_research/.gitkeep
+05_Templates/engagement/*
+!05_Templates/engagement/.gitkeep
+05_Templates/client_report/*
+!05_Templates/client_report/.gitkeep
+05_Templates/appeal/*
+!05_Templates/appeal/.gitkeep
+05_Templates/arbitration/*
+!05_Templates/arbitration/.gitkeep
+05_Templates/submissions/*
+!05_Templates/submissions/.gitkeep
+
+# Rights-cleared, sanitized DOCX mothers included in this public release.
+# Keep new/unreviewed templates ignored until separately audited and whitelisted.
+05_Templates/_Incoming/
+05_Templates/TEMPLATE_UPLOAD_QUEUE.json
+10_Logs/workflow_feedback_queue.json
+10_Logs/workflow_editor_backups/
+10_Logs/workflow_editor_direct_edits.json
+10_Logs/template_learning_*/
+!05_Templates/complaint/TPL-COM-001_民事起诉状_标准母版.docx
+!05_Templates/complaint/TPL-COM-002_民事起诉状_真实版式脱敏母版.docx
+!05_Templates/complaint/TPL-COM-002_民事起诉状_母版说明.md
+!05_Templates/defense/TPL-DEF-001_民事答辩状_标准母版.docx
+!05_Templates/appeal/TPL-APP-001_民事上诉状_标准母版.docx
+!05_Templates/arbitration/TPL-ARB-001_中英双语仲裁申请书_标准母版.docx
+!05_Templates/preservation/TPL-PRV-001_诉前财产保全申请书_标准母版.docx
+!05_Templates/preservation/TPL-PRV-002_网络查控申请书_标准母版.docx
+!05_Templates/evidence/TPL-EVD-001_证据目录_标准母版.docx
+!05_Templates/evidence/TPL-EVD-002_补充证据目录_标准母版.docx
+!05_Templates/evidence/TPL-EVD-003_质证意见_标准母版.docx
+!05_Templates/hearing/TPL-HRG-001_民商事庭审提纲_标准母版.docx
+!05_Templates/hearing/TPL-HRG-002_民商事庭审提纲_法条原文母版.docx
+!05_Templates/legal_authority/TPL-LAW-001_庭前法律法规汇编_标准母版.docx
+!05_Templates/legal_authority/TPL-LAW-002_庭前法律法规汇编_法条原文母版.docx
+!05_Templates/legal_authority/TPL-LAW-003_法律规定整理_诉请争点对应_脱敏母版.docx
+!05_Templates/legal_authority/TPL-LAW-003_法律规定整理_母版说明.md
+!05_Templates/legal_research/TPL-RES-001_法律检索报告_四列案例表_脱敏母版.docx
+!05_Templates/legal_research/TPL-RES-002_法律检索报告_六列案例表_脱敏母版.docx
+!05_Templates/legal_research/TPL-RES-001_法律检索报告_四列案例表_母版说明.md
+!05_Templates/legal_research/TPL-RES-002_法律检索报告_六列案例表_母版说明.md
+!05_Templates/submissions/TPL-SUB-001_代理意见_标准母版.docx
+!05_Templates/engagement/TPL-ENG-001_授权委托书_通用历史母版.docx
+!05_Templates/engagement/TPL-ENG-002_代理函_通用历史母版.docx
+!05_Templates/engagement/TPL-ENG-003_诉讼文件签署盖章指引_通用母版.docx
+!05_Templates/engagement/TPL-ENG-004_一审委托书_通用版式母版.docx
+!05_Templates/engagement/TPL-ENG-005_一审代理函_通用版式母版.docx
+06_Gold_Standard/pleadings/*
+!06_Gold_Standard/pleadings/.gitkeep
+06_Gold_Standard/evidence_analysis/*
+!06_Gold_Standard/evidence_analysis/.gitkeep
+06_Gold_Standard/case_analysis/*
+!06_Gold_Standard/case_analysis/.gitkeep
+06_Gold_Standard/hearing_materials/*
+!06_Gold_Standard/hearing_materials/.gitkeep
+06_Gold_Standard/calculations/*
+!06_Gold_Standard/calculations/.gitkeep
+
+# Office temporary and lock files
+~$*
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# Python and common tool caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# OS/editor metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# Matter-derived evaluations and runtime logs must not enter public Git.
+07_Evals/results/*
+!07_Evals/results/.gitkeep
+10_Logs/*
+!10_Logs/README.md
+*.log
+
+# Machine-local project Skill activation links. The authoritative Skill files are
+# tracked under 01_Skills; absolute Windows links are recreated locally.
+.agents/skills/*
+!.agents/skills/README.md
+
+# Unreviewed third-party Skill snapshots. Keep the reviewed catalog, but do not
+# commit raw external instructions before source, license, security and legal-fit review.
+01_Skills/_Candidate_Library/raw/

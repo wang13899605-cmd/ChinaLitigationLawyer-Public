@@ -1,0 +1,9 @@
+schema_version: "0.1.0"
+matter_id: null
+updated_at: null
+output_status: "AI_DRAFT"
+analysis_units: []
+
+# 每个analysis_unit至少记录：unit_id、请求、法律关系/案由候选、当事人、
+# 诉讼标的额、地点事实及状态、管辖连接点、支持/反对证据、管辖条款、
+# 在先程序、涉外因素、假设、冲突和受影响输出。

@@ -1,0 +1,23 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "lawyer_decision.schema.yaml"
+title: "Lawyer Decision"
+type: object
+additionalProperties: true
+required: [decision_id, decided_at, decision, scope, decided_by, status]
+properties:
+  decision_id: { type: string, pattern: "^D-[0-9]{4,}$" }
+  question_ids:
+    type: array
+    items: { type: string }
+  decided_at: { type: string, format: date-time }
+  decided_by: { type: string }
+  decision: { type: string }
+  scope: { type: string }
+  basis_or_explanation: { type: [string, "null"] }
+  affected_outputs:
+    type: array
+    items: { type: string }
+  valid_until: { type: [string, "null"], format: date-time }
+  supersedes: { type: [string, "null"] }
+  status: { type: string, enum: [active, superseded, withdrawn] }
+

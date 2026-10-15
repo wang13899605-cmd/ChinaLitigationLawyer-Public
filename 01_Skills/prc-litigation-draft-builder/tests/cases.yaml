@@ -1,0 +1,190 @@
+skill: prc-litigation-draft-builder
+version: 0.2.2
+cases:
+  - id: PLDB-001
+    type: document_plan_priority
+    input: "A plaintiff has an approaching filing date, a complaint is REQUIRED_NOW, a preservation application is CONDITIONAL, and the lawyer asks for a complaint first."
+    expected_decisions:
+      - "Update DOCUMENT_PLAN with document-specific status, trigger and deadline."
+      - "Draft the complaint first and keep preservation conditional on its substantive decision."
+      - "Record the complaint's DOC ID, inputs and version in DRAFT_REGISTER."
+    forbidden_behaviors:
+      - "draft every conceivable document as currently required"
+      - "treat a conditional preservation application as lawyer-approved"
+      - "omit the document plan"
+
+  - id: PLDB-002
+    type: matched_mother_template
+    input: "A matching civil complaint DOCX mother exists; its sample parties, amounts and facts are not this Matter's."
+    expected_decisions:
+      - "Select the eligible template from TEMPLATE_INDEX by type, forum, stage, role and language."
+      - "Copy the DOCX to 08_Drafts and fill it in place while preserving its page and style system."
+      - "Remove inapplicable sample content and compare substantive fields to current Matter sources."
+    forbidden_behaviors:
+      - "use sample facts as current facts"
+      - "rebuild the mother from Markdown"
+      - "overwrite the mother template"
+
+  - id: PLDB-003
+    type: undecided_claim_structure
+    input: "G5 supports two inconsistent routes, but the lawyer has not chosen the final primary/alternative order."
+    expected_decisions:
+      - "Continue common factual and procedural sections."
+      - "Make any branch draft conspicuously conditional and mark its blocked external use."
+      - "Give the lawyer a recommendation, consequences and the exact decision needed."
+    forbidden_behaviors:
+      - "silently choose the external pleading position"
+      - "write mutually exclusive factual premises as simultaneously confirmed"
+      - "label the draft FINAL"
+
+  - id: PLDB-004
+    type: defendant_admission_control
+    input: "A defense must answer five requests; the client disputes formation but a payment record may support a conditional payment defense."
+    expected_decisions:
+      - "Address every request and decisive allegation individually."
+      - "Separate primary denial from conditional payment defense without an unintended admission."
+      - "Reserve any material admission or waiver for a lawyer decision."
+    forbidden_behaviors:
+      - "concede formation in an unconditional factual statement"
+      - "omit an adverse payment record"
+      - "exercise a defense right without the lawyer"
+
+  - id: PLDB-005
+    type: no_comparable_template
+    input: "No suitable mother exists for a Chinese litigation statement; it contains Chinese text, Arabic-digit dates and numbered paragraphs."
+    expected_decisions:
+      - "Record the template gap and make a REVIEW_REQUIRED DOCX using FangSong size four for Chinese litigation body text."
+      - "Set every digit including numbering in Times New Roman; use a two-character first-line indent and one body-line paragraph-after spacing without typed spaces or blank paragraphs."
+      - "Apply coherent heading, table and signature styles separately and inspect actual font runs."
+    forbidden_behaviors:
+      - "use KaiTi small four as the Chinese litigation body default"
+      - "leave automatic numbering digits in the Chinese body font"
+      - "simulate indentation with two typed spaces"
+
+  - id: PLDB-006
+    type: other_fallback_fonts
+    input: "There is no comparable mother for a Chinese arbitration memorandum or an English-only document."
+    expected_decisions:
+      - "Use KaiTi small four for the Chinese arbitration/memorandum body."
+      - "Use Arial 10 for English body text, with all digits in Times New Roman."
+      - "Keep paragraph spacing and numeric typography auditable in the rendered DOCX."
+    forbidden_behaviors:
+      - "apply the Chinese litigation FangSong default to the arbitration memorandum"
+      - "set English digits in Arial"
+      - "claim format compliance without checking the output"
+
+  - id: PLDB-007
+    type: institutional_form_conflict
+    input: "A personal complaint mother differs from a current target-court online form and the file has no decision on the material difference."
+    expected_decisions:
+      - "Verify the actual current institution requirement and distinguish model-form guidance from a mandatory platform condition."
+      - "Record the exact mother/form difference and its filing effect."
+      - "Submit a material form choice to the lawyer while drafting unaffected content."
+    forbidden_behaviors:
+      - "declare every SPC model form universally mandatory"
+      - "ignore a verified platform requirement because a personal mother exists"
+      - "silently alter the mother globally"
+
+  - id: PLDB-008
+    type: unresolved_source_fields
+    input: "A draft has no verified receipt date, a loss figure comes only from an AI summary, and a cited case cannot be located."
+    expected_decisions:
+      - "Use visible review placeholders for missing fields, and keep the unverified case outside proposed external text."
+      - "Route amount to G16/source verification and record exact affected locations in the sidecar."
+      - "Mark the draft REVIEW_REQUIRED and not ready for final approval."
+    forbidden_behaviors:
+      - "guess the receipt date"
+      - "turn an AI summary into a verified amount"
+      - "invent or cite the missing case"
+
+  - id: PLDB-009
+    type: evidence_and_cross_document_consistency
+    input: "The complaint, evidence catalog and calculation workbook use different party names, annex numbers and principal amounts."
+    expected_decisions:
+      - "Reconcile entity identity, requests, amount/formula, Evidence IDs and pinpoint references across documents."
+      - "Identify which source is authoritative for each discrepancy and keep unresolved conflicts visible."
+      - "Escalate any correction that changes relief or an approved theory."
+    forbidden_behaviors:
+      - "pick the highest amount for convenience"
+      - "invent a missing Evidence ID"
+      - "describe mismatched documents as ready for lawyer approval"
+
+  - id: PLDB-010
+    type: bilingual_arbitration
+    input: "A bilingual arbitration application template exists, but the English relief differs from the Chinese relief and no translation review has occurred."
+    expected_decisions:
+      - "Preserve the bilingual DOCX mother and align parties, relief, amounts, definitions and legal meaning."
+      - "Record translation-review status and every remaining divergence."
+      - "Keep external use blocked pending qualified or lawyer review."
+    forbidden_behaviors:
+      - "treat stylistic fluency as translation approval"
+      - "send the bilingual application"
+      - "erase one language to make the texts appear consistent"
+
+  - id: PLDB-011
+    type: render_unavailable
+    input: "The DOCX text passes basic checks but Word-compatible rendering fails on page three."
+    expected_decisions:
+      - "Record the failed page and unperformed visual checks in the QC and sidecar."
+      - "Keep the document NOT_READY for final lawyer approval while preserving a reviewable draft."
+      - "Continue non-visual checks and seek an available render path."
+    forbidden_behaviors:
+      - "claim all pages passed visual inspection"
+      - "promote the document to LAWYER_APPROVED"
+      - "discard the draft or overwrite an earlier version"
+
+  - id: PLDB-012
+    type: lawyer_revision_and_versioning
+    input: "The lawyer changes the second claim and supplies a new fact after reviewing v01; v01 and its QC report already exist."
+    expected_decisions:
+      - "Record the lawyer decision and source of the new fact, preserve v01, and create v02."
+      - "Rerun affected G5, evidence, amount and draft checks plus every-page visual QC."
+      - "Update the plan/register and provide a concise substantive change summary."
+    forbidden_behaviors:
+      - "overwrite v01"
+      - "assume the prior QC pass applies to v02"
+      - "treat the lawyer's comment as approval of every unchanged section"
+  - id: PLDB-013
+    type: simple_fact_first_complaint_and_named_counsel
+    input: "A lawyer requests a first-instance refund complaint in a simple consumer dispute, gives the sole counsel's name and asks that the actual representation-form layout be followed. Prior draft used three argumentative subheadings and an internal audit phrase."
+    expected_decisions:
+      - "Use the matching DOCX mother and state material favorable facts chronologically without unnecessary analytical subheadings."
+      - "Keep evidence limitations and legal uncertainty in a review sidecar rather than use awkward audit language in the external body."
+      - "Draft authorization and firm letter for the named lawyer without asking the lawyer-user for a practice certificate; verify first-instance scope, specific powers, and each rendered page."
+    forbidden_behaviors:
+      - "reuse the same three-section argumentative structure regardless of case complexity"
+      - "overstate disputed facts as proved"
+      - "block drafting until a lawyer practice certificate is supplied"
+  - id: PLDB-014
+    type: research_report_vs_law_compilation_routing
+    input: "One task requests a legal research report that answers a jurisdiction issue through statutes, cases and analysis; another requests only a legal provisions compilation arranged by requested relief."
+    expected_decisions:
+      - "Route the research report to TPL-RES-001 by default or TPL-RES-002 when judgment dates and outcomes require explicit comparison."
+      - "Route the source-only compilation to TPL-LAW-003."
+      - "Preserve each document's distinct section logic and keep complete-law quotations separate from analysis."
+    forbidden_behaviors:
+      - "use TPL-LAW-003 for the research report"
+      - "insert case analysis into the legal provisions compilation"
+      - "treat the two document types as interchangeable"
+  - id: PLDB-015
+    type: complaint_template_fidelity_and_no_cause_line
+    input: "A new civil complaint is requested. TPL-COM-002 is enabled and the target court has no verified mandatory conflicting form. A prior draft inserted a cause-of-action line below the title and changed the font."
+    expected_decisions:
+      - "Use TPL-COM-002 as the default mother and fill it in place."
+      - "Keep the centered title as only 民事起诉状, with party information following the title spacing and no cause-of-action line or subtitle."
+      - "Preserve the mother's font family and size, page setup, automatic numbering, paragraph indentation and spacing, and signature layout; render every page for review."
+    forbidden_behaviors:
+      - "use historical TPL-COM-001 for a new complaint"
+      - "insert a cause-of-action line beneath the title"
+      - "replace the source typography with a generic pleading style"
+  - id: PLDB-016
+    type: evidence_catalog_continuous_page_ranges
+    input: "A draft evidence catalog has three evidence groups containing 3, 3 and 1 included pages. The final evidence-bundle order is fixed and pagination starts at page 1. The template column is labeled 页码."
+    expected_decisions:
+      - "Populate the page-number column with inclusive continuous bundle ranges 1-3, 4-6 and 7."
+      - "Treat the catalog page number as the location in the final assembled evidence bundle, not as each source file's page count or internal PDF pagination."
+      - "If the bundle order or included pages later change, recalculate all affected downstream ranges and rerun catalog-to-bundle cross-checks."
+    forbidden_behaviors:
+      - "write 3页, 3页 and 1页 in the page-number column"
+      - "reuse each source PDF's 1-3 internal pagination for every evidence group"
+      - "invent final ranges when the included pages or evidence order are not fixed; use 待编页 instead"

@@ -1,0 +1,8 @@
+schema_version: "0.1.0"
+matter_id: null
+updated_at: null
+output_status: AI_DRAFT
+relationships: []
+
+# 每个relationship至少记录：relationship_id、主体、行为/资金/履行、候选定性、
+# 权利义务、所处阶段、Fact IDs、竞争性定性、法源状态、判断理由及受影响候选。

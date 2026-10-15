@@ -1,0 +1,23 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "source.schema.yaml"
+title: "Legal or Knowledge Source"
+type: object
+additionalProperties: true
+required: [source_id, source_name, source_type, authority, scope, reliability, last_checked]
+properties:
+  source_id: { type: string, pattern: "^SRC-[0-9]{4,}$" }
+  source_name: { type: string }
+  source_type: { type: string }
+  authority: { type: string }
+  issuing_body: { type: [string, "null"] }
+  official_url: { type: [string, "null"], format: uri }
+  local_path: { type: [string, "null"] }
+  scope: { type: string }
+  jurisdiction: { type: [string, "null"] }
+  published_at: { type: [string, "null"] }
+  effective_at: { type: [string, "null"] }
+  validity_status: { type: string, enum: [effective, amended, repealed, unknown, not_applicable] }
+  reliability: { type: string, enum: [official_primary, official_secondary, verified_database, secondary, unverified] }
+  last_checked: { type: string, format: date }
+  notes: { type: [string, "null"] }
+

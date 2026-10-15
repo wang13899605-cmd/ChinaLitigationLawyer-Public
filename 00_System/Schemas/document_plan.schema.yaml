@@ -1,0 +1,22 @@
+schema_version: 1
+document_plan_item:
+  required:
+    - id
+    - document_type
+    - need_status
+    - reason
+    - output_status
+  properties:
+    id: string
+    document_type: string
+    need_status:
+      enum: [REQUIRED_NOW, RECOMMENDED, CONDITIONAL, NOT_NEEDED]
+    reason: string
+    trigger_or_deadline: string_or_null
+    template_id: string_or_null
+    template_path: string_or_null
+    dependencies: list
+    lawyer_decision_required: boolean
+    output_path: string_or_null
+    output_status:
+      enum: [AI_DRAFT, REVIEW_REQUIRED, LAWYER_APPROVED, FINAL]

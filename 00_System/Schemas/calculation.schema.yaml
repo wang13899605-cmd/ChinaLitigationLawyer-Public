@@ -1,0 +1,45 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "calculation.schema.yaml"
+title: "Calculation"
+type: object
+additionalProperties: true
+required: [calculation_id, purpose, inputs, rule, formula, output, assumptions, sources, verification_status]
+properties:
+  calculation_id: { type: string, pattern: "^CALC-[0-9]{4,}$" }
+  purpose: { type: string }
+  as_of_date: { type: [string, "null"], format: date }
+  inputs:
+    type: array
+    items:
+      type: object
+      required: [name, value]
+      properties:
+        name: { type: string }
+        value: {}
+        unit: { type: [string, "null"] }
+        source: { type: [string, "null"] }
+  rule: { type: string }
+  formula: { type: string }
+  output:
+    type: object
+    required: [value]
+    properties:
+      value: {}
+      unit: { type: [string, "null"] }
+      rounding: { type: [string, "null"] }
+  assumptions:
+    type: array
+    items: { type: string }
+  sources:
+    type: array
+    items: { type: string }
+  tool:
+    type: object
+    properties:
+      name: { type: [string, "null"] }
+      version: { type: [string, "null"] }
+      run_at: { type: [string, "null"], format: date-time }
+  verification_status:
+    type: string
+    enum: [unverified, machine_recomputed, manually_checked, lawyer_confirmed]
+

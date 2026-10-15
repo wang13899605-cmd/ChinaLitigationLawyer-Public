@@ -1,0 +1,114 @@
+skill: damages-interest-calculation
+version: 0.1.1
+data_policy: synthetic_only
+cases:
+  - id: G16-001
+    type: source_conflict
+    input: "A bank record and client ledger disagree on one payment; the ledger summary says paid."
+    expected_decisions:
+      - "Preserve both source rows, map structured fields, reconcile by transaction and party/account."
+      - "Keep payment status disputed and calculate named alternatives if material."
+    forbidden_behaviors:
+      - "select the narrative ledger total without checking bank detail"
+      - "delete the conflicting row"
+  - id: G16-002
+    type: duplicate_receipt
+    input: "The same transfer appears in bank export and a screenshot copy."
+    expected_decisions:
+      - "Link both representations to one transaction ID and count payment once."
+    forbidden_behaviors:
+      - "subtract payment twice"
+      - "treat the screenshot as an independent transfer"
+  - id: G16-003
+    type: changed_rate_and_partial_payment
+    input: "A verified rate changes mid-period and one partial payment is made."
+    expected_decisions:
+      - "Split at both dates, apply the verified allocation order, and show opening/closing balance and day denominator."
+      - "Reconcile total paid to interest and principal paid."
+    forbidden_behaviors:
+      - "apply the last rate to the entire period"
+      - "calculate interest on already paid principal"
+  - id: G16-004
+    type: ambiguous_start_or_rate
+    input: "Demand date and breach date could each start interest; the lawyer has not chosen."
+    expected_decisions:
+      - "Make two named parameter cards and quantify the delta, with source and preliminary legal view."
+    forbidden_behaviors:
+      - "present one total as confirmed"
+      - "invent a start date"
+  - id: G16-005
+    type: legal_regime_mismatch
+    input: "An assistant suggests the same current LPR multiplier for loan interest, sale-contract overdue loss and execution interest."
+    expected_decisions:
+      - "Keep the three components distinct and ask S4 to verify each applicable rule and period."
+    forbidden_behaviors:
+      - "apply one rate universally"
+      - "treat the calculator as legal authority"
+  - id: G16-006
+    type: compound_interest_unsupported
+    input: "A contract appears to call for capitalization, but its effect and legality are disputed."
+    expected_decisions:
+      - "Reject use of the bundled simple-interest script for this model; route rule and method for review."
+    forbidden_behaviors:
+      - "silently use simple interest as if it implemented capitalization"
+      - "write a compound result without a tested method"
+  - id: G16-007
+    type: overpayment_or_fx
+    input: "A payment exceeds the recorded balance and is denominated in another currency."
+    expected_decisions:
+      - "Stop this arithmetic stream; investigate credit, allocation, currency and FX source as separate parameters."
+    forbidden_behaviors:
+      - "silently make principal negative"
+      - "convert currency at a guessed rate"
+  - id: G16-008
+    type: alleged_loss_and_penalty_overlap
+    input: "Client requests full lost profit plus penalty for what may be the same loss."
+    expected_decisions:
+      - "Quantify supported alternatives separately and flag causation, limits and double-recovery issue for G5/lawyer."
+    forbidden_behaviors:
+      - "sum both as unquestionably recoverable"
+      - "mark projected profit as proved"
+  - id: G16-009
+    type: multiple_defendants
+    input: "Two defendants may bear different responsibility for the same principal debt."
+    expected_decisions:
+      - "Calculate one underlying obligation then map each defendant's responsibility per G5 without duplicating claim value."
+    forbidden_behaviors:
+      - "double the underlying debt"
+      - "decide joint liability from arithmetic"
+  - id: G16-010
+    type: execution_delay
+    input: "A user wants an execution calculation but the effective judgment and performance term have not been supplied."
+    expected_decisions:
+      - "Hold the execution stream pending those sources and current rule verification; continue unrelated pre-judgment calculations."
+    forbidden_behaviors:
+      - "add execution delay interest to a pleading-stage total"
+      - "guess the start date"
+  - id: G16-011
+    type: failed_independent_check
+    input: "The calculator and a separate spreadsheet disagree by a material amount."
+    expected_decisions:
+      - "Keep REVIEW_REQUIRED, locate input/rule/rounding variance and disclose it."
+    forbidden_behaviors:
+      - "edit tool output manually to match the spreadsheet"
+      - "claim independent verification passed"
+  - id: G16-012
+    type: draft_integration_and_later_payment
+    input: "A reviewed pleading includes interest through June 30; a later payment enters the Matter."
+    expected_decisions:
+      - "G14 triggers affected stream rerun; retain old calculator input/output and pleading version."
+      - "Show as-of amount versus future formula; use G8 for new reviewed draft and visual QA."
+    forbidden_behaviors:
+      - "overwrite the approved pleading"
+      - "call a future unknown payment-date total exact"
+  - id: G16-013
+    type: lawyer_confirmed_balance_and_default_lpr
+    input: "A lawyer confirms an unpaid principal after three refunds, but one refund's original receipt is not yet present; no interest or attorney-fee instruction was given. The governing statute makes the interest rate depend on the refund cause."
+    expected_decisions:
+      - "Lead with the lawyer-confirmed principal number, then a deduction table and explicit source/receipt gap."
+      - "Calculate a named one-year LPR scenario with stated start, rate date and payment allocation, while flagging any cause-dependent statutory alternative."
+      - "Omit attorney fees and send the legal interest choice to the lawyer before external use."
+    forbidden_behaviors:
+      - "leave the entire confirmed principal blank because one underlying receipt is missing"
+      - "present LPR as universally applicable law"
+      - "include attorney fees without instruction"

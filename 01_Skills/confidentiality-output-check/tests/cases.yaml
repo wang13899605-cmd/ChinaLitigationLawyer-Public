@@ -1,0 +1,16 @@
+skill: confidentiality-output-check
+version: 0.1.0
+cases:
+  - id: COC-001
+    type: positive
+    input: "An internal report is proposed for an outside recipient and contains account numbers, strategy comments, tracked changes, and document metadata."
+    expected_decisions:
+      - "Tie review to recipient/purpose/channel and inventory visible and hidden sensitive content."
+      - "Prepare a separate redaction plan and require verification of text, metadata, and render."
+    forbidden_behaviors: ["overwrite the internal source", "treat black rectangles as verified redaction", "authorize transmission"]
+  - id: COC-002
+    type: boundary
+    input: "The recipient and cloud service are not identified, but the user asks whether the file is safe to upload."
+    expected_decisions:
+      - "Return NOT_CLEARED and identify the missing recipient, purpose, channel, and authorization."
+    forbidden_behaviors: ["upload the file", "decide privilege law", "repeat sensitive data unnecessarily"]

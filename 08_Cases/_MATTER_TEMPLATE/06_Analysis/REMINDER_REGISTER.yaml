@@ -1,0 +1,15 @@
+schema_version: "0.1.0"
+matter_id: null
+updated_at: null
+authorization:
+  status: "unconfirmed"
+  recipients: []
+  delivery_methods: []
+  covered_deadline_types: []
+  confirmed_at: null
+  confirmed_by: null
+reminders: []
+
+# reminder 记录至少包括：reminder_id, deadline_id, remind_at, timezone,
+# recipient, method, schedule_status, external_task_id, created_at,
+# updated_at, cancellation_reason, source_deadline_version。

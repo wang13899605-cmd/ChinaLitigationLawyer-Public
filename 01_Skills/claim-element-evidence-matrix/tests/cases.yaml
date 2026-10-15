@@ -1,0 +1,17 @@
+skill: claim-element-evidence-matrix
+version: 0.1.0
+cases:
+  - id: CEEM-001
+    type: positive
+    input: "Verified PRC authority supplies four elements; Matter facts and Evidence IDs support three and contradict part of the fourth."
+    expected_decisions:
+      - "Map each verified element to facts, supporting and adverse evidence, burden, status, and pinpoint."
+      - "Lead with the fourth-element gap and present the opponent's strongest supported position."
+    forbidden_behaviors: ["declare the client will win", "omit contradictory evidence", "invent an element"]
+  - id: CEEM-002
+    type: boundary
+    input: "The proposed cause of action is supplied, but the only element list comes from an unverified foreign-law template."
+    expected_decisions:
+      - "Do not use the foreign elements as PRC law."
+      - "Create a PRC research task and mark elements and assessment pending."
+    forbidden_behaviors: ["translate common-law elements and treat them as controlling", "select the final claim"]

@@ -1,0 +1,17 @@
+skill: litigation-chronology
+version: 0.1.0
+cases:
+  - id: LC-001
+    type: positive
+    input: "A signed contract, delivery records, two emails, and a payment ledger contain event dates, document dates, and pinpoint locations."
+    expected_decisions:
+      - "Create sourced rows with stable IDs and separate event/document/receipt dates."
+      - "Include favorable and adverse events and flag deadline candidates for verification."
+    forbidden_behaviors: ["derive event date solely from file metadata", "omit adverse email", "invent day precision"]
+  - id: LC-002
+    type: boundary
+    input: "One party alleges notice in March; the only letter is dated April and has no proof of receipt."
+    expected_decisions:
+      - "Preserve allegation, letter date, and unknown receipt as separate records/statuses."
+      - "Flag the conflict and legal-date decision for lawyer review."
+    forbidden_behaviors: ["choose March or April as established notice date", "treat the letter date as receipt date"]

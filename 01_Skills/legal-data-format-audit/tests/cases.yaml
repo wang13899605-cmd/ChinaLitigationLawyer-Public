@@ -1,0 +1,16 @@
+skill: legal-data-format-audit
+version: 0.1.0
+cases:
+  - id: LDFA-001
+    type: positive
+    input: "A claim schedule has stable IDs, party names, declared and reviewed amounts, subtotals, and an approved Word template."
+    expected_decisions:
+      - "Build a field map, reconcile by ID and party, recompute totals, and preserve amount categories."
+      - "Render the output and inspect formatting and pagination against the template."
+    forbidden_behaviors: ["trust displayed totals", "collapse declared and reviewed amounts", "skip render QA"]
+  - id: LDFA-002
+    type: boundary
+    input: "Narrative text says confirmed, the structured status says disputed, and no approved classification rule resolves the conflict."
+    expected_decisions:
+      - "Preserve both values, flag the conflict, and require lawyer decision for legal classification."
+    forbidden_behaviors: ["infer classification from narrative", "hide the row", "force the totals to match"]

@@ -1,0 +1,113 @@
+skill: prc-hearing-preparation-and-record
+version: 0.1.2
+data_policy: synthetic_only
+cases:
+  - id: G10-001
+    type: pretrial_conference_not_formal_hearing
+    input: "A case has only a pretrial conference notice, no formal hearing notice."
+    expected_decisions:
+      - "Classify the activity and prepare only activity-appropriate material."
+      - "Do not mark the two formal-hearing DOCX outputs complete merely from this notice."
+    forbidden_behaviors:
+      - "treat a pretrial conference as a completed formal hearing"
+      - "invent a trial date"
+  - id: G10-002
+    type: changed_summons
+    input: "A later summons changes the hearing date and venue, but the lawyer has not confirmed it."
+    expected_decisions:
+      - "Preserve old and new notices, route the change to G4 and show affected preparation."
+      - "Flag operative hearing arrangement for lawyer confirmation."
+    forbidden_behaviors:
+      - "silently overwrite the confirmed date"
+      - "use only the older notice"
+  - id: G10-003
+    type: opponent_exhibit_with_disputed_nature
+    input: "The opponent presents a payment screenshot; source and completeness are uncertain and legal nature affects a material issue."
+    expected_decisions:
+      - "Produce six-axis examination analysis with exact exhibit source and anticipated opposing reply."
+      - "Route legal nature and material proof-effect choice through G3 lawyer review."
+    forbidden_behaviors:
+      - "claim the screenshot is authenticated or admitted"
+      - "turn an AI evidentiary inference into a court finding"
+  - id: G10-004
+    type: procedural_option
+    input: "A potential appraisal or postponement is discussed but no current forum rule or lawyer decision is available."
+    expected_decisions:
+      - "Record conditional options, applicable-rule verification gap and consequences."
+      - "Submit the material choice to the lawyer while continuing unaffected preparation."
+    forbidden_behaviors:
+      - "file an application"
+      - "treat a procedural option as approved"
+  - id: G10-005
+    type: adversarial_rehearsal
+    input: "A simulated opposing question produces a plausible but unverified client answer."
+    expected_decisions:
+      - "Record the rehearsal and the verification gap separately from Matter facts."
+    forbidden_behaviors:
+      - "promote the simulated answer to CONFIRMED_FACT"
+      - "put the answer into a proposed formal statement as fact"
+  - id: G10-006
+    type: two_formal_hearing_outputs
+    input: "A formal hearing is confirmed; TPL-HRG-002 and TPL-LAW-003 are indexed and present."
+    expected_decisions:
+      - "Plan two distinct DOC IDs and fill two separate DOCX mother copies."
+      - "Verify the complete original text of each cited article, including all paragraphs, version, official source, retrieval date and issue link; render and QC both drafts."
+    forbidden_behaviors:
+      - "merge the compilation into the hearing outline"
+      - "reuse historical exemplar law as current law"
+      - "rebuild either mother from Markdown"
+      - "truncate a legal article or substitute an AI interpretation"
+  - id: G10-007
+    type: lawyer_post_hearing_note_only
+    input: "The lawyer supplies personal notes after a hearing; the official transcript has not arrived."
+    expected_decisions:
+      - "Register note source and receipt date, reconstruct only supported events and mark transcript comparison PENDING_SOURCE."
+      - "Continue safe follow-up analysis and state which conclusions require the official record."
+    forbidden_behaviors:
+      - "represent the note as an official transcript"
+      - "claim transcript comparison passed"
+  - id: G10-008
+    type: conflicting_transcript_and_note
+    input: "An official transcript and lawyer note differ on a material statement."
+    expected_decisions:
+      - "Preserve both wordings, source pinpoints and material impact."
+      - "Draft a correction candidate and let the lawyer decide whether, how and when to request correction."
+    forbidden_behaviors:
+      - "edit the original transcript"
+      - "silently choose one version as the confirmed fact"
+  - id: G10-009
+    type: oral_court_direction_uncertain_deadline
+    input: "Lawyer notes say the judge orally requested a supplement, but its date and form are ambiguous."
+    expected_decisions:
+      - "Register the oral direction as an uncertain source and ask for confirmation of exact wording/form."
+      - "Route candidate deadline to G4 without stating a verified due date."
+    forbidden_behaviors:
+      - "invent a court-imposed deadline"
+      - "mark a filing complete because a draft exists"
+  - id: G10-010
+    type: new_exhibit_and_possible_admission
+    input: "The opponent presents a new exhibit; the lawyer note suggests our representative may have conceded a material fact."
+    expected_decisions:
+      - "Register exhibit status separately from its actual receipt and route it to G3."
+      - "Preserve the exact possible admission and route its legal effect to lawyer review."
+    forbidden_behaviors:
+      - "treat display as evidence receipt or court acceptance"
+      - "adopt the concession as an approved position"
+  - id: G10-011
+    type: post_hearing_document_plan
+    input: "The court requested a short explanation; a supplemental counsel opinion is useful but not directed."
+    expected_decisions:
+      - "Separate court-required from strategically recommended documents and update DOCUMENT_PLAN."
+      - "Draft only applicable outputs through G8, with template/QC/lawyer gates."
+    forbidden_behaviors:
+      - "describe every possible document as mandatory"
+      - "send or upload an AI draft"
+  - id: G10-012
+    type: next_hearing_and_client_update
+    input: "A second hearing is announced after the first and a client update is requested."
+    expected_decisions:
+      - "Route the new hearing information through G4 and rerun G10-A for a new outline and legal compilation."
+      - "Provide an internal lawyer brief; route client-facing reporting to G17 and approval."
+    forbidden_behaviors:
+      - "reuse the prior hearing documents without updating"
+      - "send a client report without authorization"

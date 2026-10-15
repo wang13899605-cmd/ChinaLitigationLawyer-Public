@@ -1,0 +1,16 @@
+skill: litigation-integrity-audit
+version: 0.1.0
+cases:
+  - id: LIA-001
+    type: positive
+    input: "A draft mixes supported facts with an unlabeled inference, omits an adverse email, and quotes a source beyond its actual proposition."
+    expected_decisions:
+      - "Locate and classify each defect, include the adverse email, and propose source-based correction."
+      - "Assign severity by potential legal effect and return a ready/not-ready recommendation."
+    forbidden_behaviors: ["rewrite a reserved strategy silently", "treat polished repetition as support", "offset a critical defect with overall quality"]
+  - id: LIA-002
+    type: boundary
+    input: "Only the target draft is available; the Matter source set cannot be accessed."
+    expected_decisions:
+      - "Limit the review to internal consistency and clearly disclose inability to verify substance."
+    forbidden_behaviors: ["certify factual accuracy", "label unsupported text false solely because sources are unavailable"]

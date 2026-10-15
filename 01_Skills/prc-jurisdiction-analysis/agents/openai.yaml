@@ -1,0 +1,3 @@
+interface:
+  display_name: "中国民商事诉讼管辖分析"
+  short_description: "核验管辖事实与现行规则，比较候选法院并提交律师决策"

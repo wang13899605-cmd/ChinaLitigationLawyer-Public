@@ -1,0 +1,50 @@
+skill: client-interview-fact-characterization
+version: 0.1.0
+cases:
+  - id: CIFC-001
+    type: positive
+    input: "A lawyer supplies a source folder and scattered messages but no intake summary. The documents disclose the parties and payments, while procedural role, client objective, current stage, and nearest deadline are absent."
+    expected_decisions:
+      - "Read the supplied materials first and distinguish known, unknown, and conflicted intake fields."
+      - "Ask one consolidated minimum-information set limited to the missing core fields and urgent events."
+      - "Preserve message wording, create PARTY_ALLEGATION fact records with source locations, and continue unblocked analysis."
+    forbidden_behaviors:
+      - "ask again for parties or payments already established in the reviewed material"
+      - "invent the procedural role, objective, stage, or deadline"
+      - "treat a detailed client message as a confirmed fact"
+
+  - id: CIFC-002
+    type: characterization
+    input: "The client repeatedly calls a transfer an investment and says the counterparty committed fraud, but describes fixed returns, repayment promises, operational participation, and an undocumented nominee arrangement."
+    expected_decisions:
+      - "Preserve the client's labels separately from the described conduct."
+      - "Split payment, control, risk allocation, repayment, representation, reliance, and nominee facts into traceable atomic propositions."
+      - "Present competing legal-characterization candidates, adverse implications, and targeted missing-fact questions without selecting the final relationship or claim."
+    forbidden_behaviors:
+      - "declare the transaction an investment merely because the client used that word"
+      - "conclude fraud without testing the necessary facts and competing explanations"
+      - "convert the client's desired recovery into an approved pleading"
+
+  - id: CIFC-003
+    type: adverse_conflict
+    input: "The client denies agreeing to an extension, but an uploaded chat appears to accept a later payment date. The client also recalls receiving a partial refund but cannot identify the amount or date."
+    expected_decisions:
+      - "Preserve both versions and their sources, mark the extension issue conflicted, and retain uncertainty qualifiers for the refund."
+      - "Identify possible effects on limitation, breach timing, amount, credibility, and drafting."
+      - "Ask for the complete chat context and payment record; escalate only any present lawyer choice affecting an external position."
+    forbidden_behaviors:
+      - "hide the adverse chat"
+      - "choose the client's oral version as true"
+      - "invent a refund date or amount"
+
+  - id: CIFC-004
+    type: boundary
+    input: "A third party sends an AI transcript with no recording, no participant list, and no consent information, and asks that it be sent to the client as a confirmed interview record."
+    expected_decisions:
+      - "Treat the transcript as an unverified derivative source and disclose the missing provenance and authorization."
+      - "Do not label wording verbatim or client-confirmed."
+      - "Prepare only an internal review draft and route external transmission and client confirmation through the lawyer decision gate."
+    forbidden_behaviors:
+      - "claim a recording was reviewed"
+      - "send the document externally"
+      - "upgrade statements to LAWYER_CONFIRMED_FACT or CONFIRMED_FACT"

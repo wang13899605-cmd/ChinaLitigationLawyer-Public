@@ -1,0 +1,293 @@
+schema_version: 1
+last_updated: 2026-09-22
+canonical_format: docx
+default_output_status: REVIEW_REQUIRED
+selection_policy: 00_System/Rules/09_template_selection_and_fidelity.md
+lawyer_review: 05_Templates/TEMPLATE_REVIEW.md
+templates:
+  - id: TPL-COM-001
+    title: 民事起诉状标准母版
+    path: 05_Templates/complaint/TPL-COM-001_民事起诉状_标准母版.docx
+    document_type: civil_complaint
+    forum: court
+    stage: first_instance_filing
+    party_role: plaintiff
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: false
+    lawyer_approval: pending
+    usage_note: 历史版保留供回溯；2026-09-22起民事起诉状新稿使用TPL-COM-002。
+  - id: TPL-COM-002
+    title: 民事起诉状真实版式脱敏母版
+    path: 05_Templates/complaint/TPL-COM-002_民事起诉状_真实版式脱敏母版.docx
+    document_type: civil_complaint
+    forum: court
+    stage: first_instance_filing
+    party_role: plaintiff
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    default_for_document_type: true
+    lawyer_approval: format_reference_supplied_by_lawyer_content_review_pending
+    formatting_authority: lawyer_supplied_reference_docx
+    usage_note: 民事起诉状默认母版；标题仅写“民事起诉状”，标题下不写案由或副标题，直接进入原告信息。严格沿用母版字体、字号、页面、编号、段落及签署格式；事实简单时按时间顺序连续叙事，不机械拆分三段论证。
+  - id: TPL-DEF-001
+    title: 民事答辩状标准母版
+    path: 05_Templates/defense/TPL-DEF-001_民事答辩状_标准母版.docx
+    document_type: civil_defense
+    forum: court
+    stage: responsive_pleading
+    party_role: defendant_or_respondent
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: pending
+  - id: TPL-APP-001
+    title: 民事上诉状标准母版
+    path: 05_Templates/appeal/TPL-APP-001_民事上诉状_标准母版.docx
+    document_type: civil_appeal
+    forum: court
+    stage: second_instance_filing
+    party_role: appellant
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: pending
+  - id: TPL-ARB-001
+    title: 中英双语仲裁申请书标准母版
+    path: 05_Templates/arbitration/TPL-ARB-001_中英双语仲裁申请书_标准母版.docx
+    document_type: arbitration_application
+    forum: arbitration
+    stage: arbitration_filing
+    party_role: claimant
+    language: zh-CN+en
+    firm_specific: false
+    translation_review_required: true
+    enabled_for_ai_draft: true
+    lawyer_approval: pending
+  - id: TPL-PRV-001
+    title: 诉前财产保全申请书标准母版
+    path: 05_Templates/preservation/TPL-PRV-001_诉前财产保全申请书_标准母版.docx
+    document_type: pre_litigation_property_preservation_application
+    forum: court
+    stage: pre_litigation
+    party_role: applicant
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: pending
+  - id: TPL-PRV-002
+    title: 网络查控申请书标准母版
+    path: 05_Templates/preservation/TPL-PRV-002_网络查控申请书_标准母版.docx
+    document_type: online_asset_inquiry_and_control_application
+    forum: court
+    stage: preservation_or_enforcement
+    party_role: applicant
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: pending
+  - id: TPL-EVD-001
+    title: 证据目录标准母版
+    path: 05_Templates/evidence/TPL-EVD-001_证据目录_标准母版.docx
+    document_type: evidence_catalog
+    forum: court_or_arbitration
+    stage: evidence_submission
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: pending
+  - id: TPL-EVD-002
+    title: 补充证据目录标准母版
+    path: 05_Templates/evidence/TPL-EVD-002_补充证据目录_标准母版.docx
+    document_type: supplemental_evidence_catalog
+    forum: court_or_arbitration
+    stage: supplemental_evidence_submission
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: pending
+  - id: TPL-EVD-003
+    title: 质证意见标准母版
+    path: 05_Templates/evidence/TPL-EVD-003_质证意见_标准母版.docx
+    document_type: evidence_examination_opinion
+    forum: court_or_arbitration
+    stage: evidence_examination
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: pending
+  - id: TPL-HRG-001
+    title: 民商事庭审提纲标准母版
+    path: 05_Templates/hearing/TPL-HRG-001_民商事庭审提纲_标准母版.docx
+    document_type: hearing_outline
+    forum: court_or_arbitration
+    stage: hearing_preparation
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: false
+    lawyer_approval: pending
+    usage_note: 历史版保留供回溯；法律依据栏目含“适用说明”提示，2026-09-14起新稿改用TPL-HRG-002。
+  - id: TPL-HRG-002
+    title: 民商事庭审提纲法条原文母版
+    path: 05_Templates/hearing/TPL-HRG-002_民商事庭审提纲_法条原文母版.docx
+    document_type: hearing_outline
+    forum: court_or_arbitration
+    stage: hearing_preparation
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: pending
+    usage_note: 法律依据栏目逐条照录经核验的适用版本完整法条原文，含全部款项；解释分析另写内部备忘录。
+  - id: TPL-LAW-001
+    title: 庭前法律法规汇编标准母版
+    path: 05_Templates/legal_authority/TPL-LAW-001_庭前法律法规汇编_标准母版.docx
+    document_type: pre_hearing_legal_authority_compilation
+    forum: court_or_arbitration
+    stage: hearing_preparation
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: false
+    lawyer_approval: pending
+    usage_note: 历史版保留供回溯；含“适用说明”提示，2026-09-21起新稿改用TPL-LAW-003。
+  - id: TPL-LAW-002
+    title: 庭前法律法规汇编法条原文母版
+    path: 05_Templates/legal_authority/TPL-LAW-002_庭前法律法规汇编_法条原文母版.docx
+    document_type: pre_hearing_legal_authority_compilation
+    forum: court_or_arbitration
+    stage: hearing_preparation
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: false
+    lawyer_approval: pending
+    usage_note: 历史版保留供回溯；2026-09-21起新作法律规定整理/法律法规汇编改用TPL-LAW-003。不得作为法律检索报告母版。
+  - id: TPL-LAW-003
+    title: 法律规定整理诉请争点对应脱敏母版
+    path: 05_Templates/legal_authority/TPL-LAW-003_法律规定整理_诉请争点对应_脱敏母版.docx
+    document_type: legal_provisions_compilation
+    forum: court_or_arbitration
+    stage: research_or_filing_preparation
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: format_reference_supplied_by_lawyer_content_review_pending
+    formatting_authority: lawyer_supplied_reference_docx
+    usage_note: 按诉请、争点或权利基础分组，列明对应关系并逐条照录经核验的完整法条原文和客观检索元数据；不写案例、适用分析、策略或结论。不得作为法律检索报告母版。
+  - id: TPL-RES-001
+    title: 法律检索报告四列案例表脱敏母版
+    path: 05_Templates/legal_research/TPL-RES-001_法律检索报告_四列案例表_脱敏母版.docx
+    document_type: legal_research_report
+    forum: court_or_arbitration
+    stage: legal_research
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: format_reference_supplied_by_lawyer_content_review_pending
+    formatting_authority: lawyer_supplied_reference_docx
+    default_for_document_type: true
+    usage_note: 默认法律检索报告母版；依次呈现基本事实/案情简要、检索问题、完整法律规定、案例、分析及四列案例一览表（编号、法院-案号、裁判要旨、页码）。分析与法条原文必须分隔。
+  - id: TPL-RES-002
+    title: 法律检索报告六列案例表脱敏母版
+    path: 05_Templates/legal_research/TPL-RES-002_法律检索报告_六列案例表_脱敏母版.docx
+    document_type: legal_research_report
+    forum: court_or_arbitration
+    stage: legal_research
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: format_reference_supplied_by_lawyer_content_review_pending
+    formatting_authority: lawyer_supplied_reference_docx
+    usage_note: 需要显式比较裁判日期和裁判结果时使用；栏目为编号、法院-案号、裁判日期、裁判要旨、裁判结果、页码。其余结构同法律检索报告，不得替代为法规汇编。
+  - id: TPL-SUB-001
+    title: 代理意见标准母版
+    path: 05_Templates/submissions/TPL-SUB-001_代理意见_标准母版.docx
+    document_type: counsel_submission
+    forum: court_or_arbitration
+    stage: hearing_or_post_hearing_submission
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: pending
+  - id: TPL-ENG-001
+    title: 授权委托书通用历史母版
+    path: 05_Templates/engagement/TPL-ENG-001_授权委托书_通用历史母版.docx
+    document_type: power_of_attorney
+    forum: court_or_arbitration
+    stage: representation_filing
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: false
+    lawyer_approval: prior_default_superseded_for_new_drafts_2026-09-14
+    lawyer_approval_date: 2026-09-12
+    default_authorization_scope: special_authorization_unless_lawyer_instructs_otherwise
+    formatting_authority: source_docx
+    lawyer_confirmed_variable_fields:
+      - client_name
+      - counsel_1
+      - counsel_2
+      - signing_date
+    system_derived_variable_fields:
+      - matter_description
+    usage_note: 历史母版保留供追溯；2026-09-14律师提出格式纠正后，一审事项优先使用TPL-ENG-004。不得自动以本旧版起草新案件。
+  - id: TPL-ENG-002
+    title: 代理函通用历史母版
+    path: 05_Templates/engagement/TPL-ENG-002_代理函_通用历史母版.docx
+    document_type: law_firm_representation_letter
+    forum: court_or_arbitration
+    stage: representation_filing
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: false
+    lawyer_approval: pending
+    usage_note: 历史母版保留供追溯；一审事项优先使用TPL-ENG-005。
+  - id: TPL-ENG-004
+    title: 一审授权委托书通用版式母版
+    path: 05_Templates/engagement/TPL-ENG-004_一审委托书_通用版式母版.docx
+    document_type: power_of_attorney
+    forum: court
+    stage: first_instance
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: format_reference_supplied_by_lawyer_content_review_pending
+    default_authorization_scope: special_authorization_unless_lawyer_instructs_otherwise
+    formatting_authority: source_docx
+    usage_note: 单律师或多律师按当前指令填写；不把旧案第二代理律师带入。代理权限沿用真实版式母版固定特别授权条款，期限限一审；签署前律师核对授权范围。
+  - id: TPL-ENG-005
+    title: 一审代理函通用版式母版
+    path: 05_Templates/engagement/TPL-ENG-005_一审代理函_通用版式母版.docx
+    document_type: law_firm_representation_letter
+    forum: court
+    stage: first_instance
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: format_reference_supplied_by_lawyer_content_review_pending
+    formatting_authority: source_docx
+    usage_note: 律所地址和联系方式为待填字段，须按现行律所信息核对；未立案时不得写贵院已受理。
+  - id: TPL-ENG-003
+    title: 诉讼文件签署盖章指引通用母版
+    path: 05_Templates/engagement/TPL-ENG-003_诉讼文件签署盖章指引_通用母版.docx
+    document_type: signature_and_seal_instruction
+    forum: court_or_arbitration
+    stage: filing_preparation
+    party_role: any
+    language: zh-CN
+    firm_specific: false
+    enabled_for_ai_draft: true
+    lawyer_approval: pending

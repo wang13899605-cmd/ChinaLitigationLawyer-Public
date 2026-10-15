@@ -1,0 +1,8 @@
+# Official form and source checks
+
+Baseline checked: `2026-09-13`. Reverify before each real Matter; this reference is not itself a finding that any form, law or local platform rule applies to the case.
+
+- The [SPC, Ministry of Justice and All China Lawyers Association notice, 法〔2025〕82号](https://gongbao.court.gov.cn/Details/58f1a4cb9bbdcc45faa565a6e0db5b.html) published 67 model complaint/defense forms for nationwide promotion from `2025-07-14`. The [SPC explanation](https://www.court.gov.cn/fabu/xiangqing/468671.html) describes promotion as guidance that respects parties' and lawyers' choices. Do not label the model forms universally mandatory. Check the actual case type, target court and platform's current instructions; show any material difference from the user's mother template.
+- The [SPC 2025 third revision of the Civil Cause of Action Rules](https://www.court.gov.cn/zixun/xiangqing/484231.html) took effect `2026-01-01`. Use the applicable current classification, but keep cause of action distinct from substantive claim basis, relief and filing conditions.
+- For the operative procedural and substantive text, use `prc-legal-research` and official sources; record title, issuing body, document number, effectiveness, exact provision, retrieval date, source URL/copy and Matter-specific temporal fit. A court model form, secondary article or historical template does not prove a disputed legal proposition.
+- Local court notices, online filing instructions, arbitration rules, annex requirements, document counts and file formats can change. Verify at the relevant institution and date. A counter or telephone answer is dated practice information, not a replacement for binding law.

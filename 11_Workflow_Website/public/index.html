@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="汪佳成诉讼律师自动化工作流的本地可视化与维护工作台">
+  <title>汪佳成诉讼律师自动化工作流</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#overview" aria-label="返回工作流总览">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-copy"><strong>汪佳成</strong><span>诉讼律师自动化工作流</span></span>
+      </a>
+      <nav class="topnav" aria-label="主要导航">
+        <a href="#overview" data-route="overview">工作流</a>
+        <a href="#skills" data-route="skills">Skills</a>
+        <a href="#templates" data-route="templates">模板库</a>
+        <a href="#feedback" data-route="feedback">反馈与迭代</a>
+      </nav>
+      <div class="top-actions">
+        <span class="live-indicator"><i></i>本地实时</span>
+        <button class="icon-button" id="refreshButton" type="button" aria-label="刷新工作流数据" title="刷新数据">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8.1 8.1 0 1 0 2 5.3M20 4v7h-7"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="site-title">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow">LITIGATION OPERATING SYSTEM · LOCAL</p>
+          <h1 id="site-title">把每一次诉讼工作，沉淀为可复用的专业流程。</h1>
+          <div class="hero-meta">
+            <span id="heroRevision">读取版本中</span>
+            <span id="heroUpdated">同步中</span>
+          </div>
+        </div>
+        <div class="hero-stat-grid" id="heroStats" aria-label="系统概览"></div>
+      </section>
+
+      <div class="workspace">
+        <aside class="side-rail" aria-label="工作台导航">
+          <button class="rail-item is-active" data-view="overview" type="button"><span>01</span>流程总览</button>
+          <button class="rail-item" data-view="skills" type="button"><span>02</span>Skill 中枢</button>
+          <button class="rail-item" data-view="templates" type="button"><span>03</span>模板管理</button>
+          <button class="rail-item" data-view="feedback" type="button"><span>04</span>问题反馈</button>
+          <div class="rail-note">
+            <p>唯一数据源</p>
+            <strong>ChinaLitigationLawyer</strong>
+            <small>刷新后读取本地最新文件</small>
+          </div>
+        </aside>
+
+        <section class="content-area">
+          <div class="loading-state" id="loadingState">
+            <span></span><p>正在读取本地工作流</p>
+          </div>
+          <div class="error-state" id="errorState" hidden>
+            <strong>暂时无法读取工作流</strong>
+            <p id="errorMessage"></p>
+            <button type="button" id="retryButton">重新读取</button>
+          </div>
+
+          <section class="view is-active" id="view-overview" data-view-panel="overview" aria-labelledby="overview-title">
+            <div class="section-heading">
+              <div><p class="section-kicker">END-TO-END WORKFLOW</p><h2 id="overview-title">诉讼全生命周期</h2></div>
+              <div class="heading-tools">
+                <label class="search-field"><span class="sr-only">搜索动作</span><input id="workflowSearch" type="search" placeholder="搜索动作、输出或 Skill"></label>
+              </div>
+            </div>
+            <div class="phase-strip" id="phaseStrip"></div>
+            <div class="workflow-layout">
+              <div class="stage-grid" id="stageGrid"></div>
+              <aside class="stage-detail" id="stageDetail" aria-live="polite"></aside>
+            </div>
+          </section>
+
+          <section class="view" id="view-skills" data-view-panel="skills" aria-labelledby="skills-title">
+            <div class="section-heading">
+              <div><p class="section-kicker">COMPOSABLE EXPERTISE</p><h2 id="skills-title">Skill 中枢</h2></div>
+              <label class="search-field"><span class="sr-only">搜索Skill</span><input id="skillSearch" type="search" placeholder="搜索 Skill 名称或职责"></label>
+            </div>
+            <div class="filter-row" id="skillFilters">
+              <button type="button" class="filter-chip is-active" data-skill-filter="all">全部</button>
+              <button type="button" class="filter-chip" data-skill-filter="active">已激活</button>
+              <button type="button" class="filter-chip" data-skill-filter="draft">Draft</button>
+            </div>
+            <div class="skill-grid" id="skillGrid"></div>
+          </section>
+
+          <section class="view" id="view-templates" data-view-panel="templates" aria-labelledby="templates-title">
+            <div class="section-heading">
+              <div><p class="section-kicker">DOCUMENT MOTHERS</p><h2 id="templates-title">模板库</h2></div>
+              <label class="search-field"><span class="sr-only">搜索模板</span><input id="templateSearch" type="search" placeholder="搜索名称、类型或阶段"></label>
+            </div>
+            <div class="template-layout">
+              <div>
+                <div class="filter-row" id="templateFilters"></div>
+                <div class="template-table-wrap">
+                  <table class="template-table">
+                    <thead><tr><th>模板</th><th>适用阶段</th><th>状态</th><th>文件</th></tr></thead>
+                    <tbody id="templateTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+              <aside class="upload-panel">
+                <p class="section-kicker">LOCAL INTAKE</p>
+                <h3>上传或更新模板</h3>
+                <p class="panel-copy">文件会直接进入本地 <code>05_Templates/_Incoming</code>，等待脱敏、版式核验和索引更新，不经过公开网站。</p>
+                <form id="templateUploadForm">
+                  <label>操作方式<select name="mode" id="uploadMode"><option value="new">新增模板</option><option value="update">更新既有模板</option></select></label>
+                  <label id="replaceIdLabel" hidden>替换对象<select name="replaceId" id="replaceTemplateId"></select></label>
+                  <label>模板名称<input name="title" type="text" maxlength="200" placeholder="例如：律师函标准母版" required></label>
+                  <label>分类<select name="category" id="uploadCategory" required></select></label>
+                  <label class="file-drop" id="fileDrop"><input name="file" id="templateFile" type="file" accept=".docx,.dotx" required><span>选择或拖入 DOCX / DOTX</span><small>最大 50MB</small></label>
+                  <label>说明<textarea name="notes" rows="3" maxlength="2000" placeholder="适用场景、版式来源或需要保留的特殊规则"></textarea></label>
+                  <button class="primary-button" type="submit">同步到本地模板库</button>
+                  <p class="form-status" id="uploadStatus" role="status"></p>
+                </form>
+                <div class="queue-list" id="uploadQueue"></div>
+              </aside>
+            </div>
+          </section>
+
+          <section class="view" id="view-feedback" data-view-panel="feedback" aria-labelledby="feedback-title">
+            <div class="section-heading">
+              <div><p class="section-kicker">CONTINUOUS IMPROVEMENT</p><h2 id="feedback-title">反馈与迭代</h2></div>
+            </div>
+            <div class="feedback-layout">
+              <form class="feedback-form" id="feedbackForm">
+                <div class="form-intro"><span>01</span><div><h3>记录工作流问题</h3><p>定位到阶段、动作或 Skill，提交后生成可直接交给 Codex 的修订指令。</p></div></div>
+                <div class="form-grid">
+                  <label>流程阶段<select name="stage" id="feedbackStage"><option value="">请选择</option></select></label>
+                  <label>具体动作<select name="actionId" id="feedbackAction"><option value="">请选择</option></select></label>
+                  <label>关联 Skill<select name="skill" id="feedbackSkill"><option value="">请选择</option></select></label>
+                  <label>影响程度<select name="severity"><option value="medium">一般影响</option><option value="high">重要偏差</option><option value="critical">可能造成重大错误</option><option value="low">体验改进</option></select></label>
+                </div>
+                <label>发现的问题<textarea name="problem" rows="5" maxlength="4000" placeholder="说明在哪一步发生了什么、当前结果为何不符合执业习惯" required></textarea></label>
+                <label>希望如何改进<textarea name="expected" rows="4" maxlength="4000" placeholder="填写期望逻辑、判断门槛或输出方式"></textarea></label>
+                <label>示例或复现场景<textarea name="example" rows="3" maxlength="4000" placeholder="可选；不得在这里粘贴不必要的客户敏感信息"></textarea></label>
+                <button class="primary-button" type="submit">登记问题并生成修订指令</button>
+                <p class="form-status" id="feedbackStatus" role="status"></p>
+              </form>
+              <aside class="feedback-queue-panel">
+                <div class="panel-heading"><div><p class="section-kicker">OPEN ITEMS</p><h3>待处理问题</h3></div><span id="feedbackCount">0</span></div>
+                <div id="feedbackQueue" class="feedback-queue"></div>
+              </aside>
+            </div>
+          </section>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="detail-dialog" id="detailDialog">
+    <button class="dialog-close" type="button" aria-label="关闭">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

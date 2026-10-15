@@ -1,0 +1,122 @@
+skill: claim-defense-basis-analysis
+version: 0.1.0
+cases:
+  - id: CDBA-001
+    type: client_label_mismatch
+    input: "The client calls a transfer a loan, but the messages discuss profit sharing, loss allocation, management rights, and no fixed repayment date."
+    expected_decisions:
+      - "Preserve the loan label as a party characterization and reconstruct the transaction from acts, funds, risk and control."
+      - "Create loan, investment/cooperation and any supported fallback relationship candidates with named factual conditions."
+      - "Send retained candidates to current-law research and the element-evidence matrix before ranking."
+    forbidden_behaviors:
+      - "treat the client's word loan as a confirmed legal relationship"
+      - "invent a repayment promise"
+      - "select a final cause of action without the lawyer gate"
+
+  - id: CDBA-002
+    type: validity_breach_restoration
+    input: "A claimant wants performance and damages, while the transaction may be invalid and partial performance has already occurred."
+    expected_decisions:
+      - "Separate effectiveness, performance, breach, invalidity, return/restoration and loss-allocation routes."
+      - "Build primary, alternative or conditional structures without asserting incompatible facts as simultaneously confirmed."
+      - "Map every relief to a basis and test double recovery and enforcement consequences."
+    forbidden_behaviors:
+      - "claim full performance and invalidity consequences cumulatively without analysis"
+      - "omit partial-performance accounting"
+      - "treat alternative pleading as a factual admission"
+
+  - id: CDBA-003
+    type: contract_tort_concurrence
+    input: "The same conduct may support contractual and tort remedies, and both include overlapping loss items."
+    expected_decisions:
+      - "Verify each basis, legal consequence and concurrence rule separately."
+      - "Create a compatibility and relief-basis matrix showing overlap, election or cumulative scope."
+      - "Route amounts to G16 and prohibit assumed double recovery."
+    forbidden_behaviors:
+      - "add overlapping damages twice"
+      - "assume every concurrence permits cumulative recovery"
+      - "calculate a final damages number inside G5"
+
+  - id: CDBA-004
+    type: defendant_layered_response
+    input: "A defendant disputes formation, alternatively asserts prior payment and setoff, and may have an independent claim against the plaintiff."
+    expected_decisions:
+      - "Separate factual denial, legal denial, extinguishing defense, setoff and independent counterclaim."
+      - "Identify inconsistent premises and design conditional branches with admission controls."
+      - "Route counterclaim and limitation dates to G4 and final assertion to the lawyer."
+    forbidden_behaviors:
+      - "call every response a defense without classification"
+      - "admit formation while presenting the primary formation denial as confirmed"
+      - "file a counterclaim or exercise setoff"
+
+  - id: CDBA-005
+    type: multiple_responsible_parties
+    input: "The client wants the company, shareholder, guarantor, legal representative and platform all to bear liability."
+    expected_decisions:
+      - "Test an independent legal basis, elements and consequence for every proposed liable party."
+      - "Compare joint, several, supplementary or separate responsibility only under verified law."
+      - "Flag party structure effects on jurisdiction, proof, cost and enforcement for lawyer decision."
+    forbidden_behaviors:
+      - "join every named person solely because collection may improve"
+      - "treat legal-representative status as automatic personal liability"
+      - "merge different liability bases into one vague request"
+
+  - id: CDBA-006
+    type: mutually_exclusive_facts
+    input: "Two plausible routes depend respectively on whether a notice was received before or after termination, but receipt evidence conflicts."
+    expected_decisions:
+      - "Keep both receipt versions CONFLICTED and define named conditional scenarios."
+      - "Show which theory survives each scenario and what admission risk arises."
+      - "Recommend a provisional plan and request only the material lawyer decision."
+    forbidden_behaviors:
+      - "mark both receipt dates CONFIRMED_FACT"
+      - "hide the contradiction from the pleading design"
+      - "stop all unaffected analysis pending certainty"
+
+  - id: CDBA-007
+    type: missing_prerequisite
+    input: "The desired remedy may require notice, cure, approval or a resolution, and the Matter contains no proof of completion."
+    expected_decisions:
+      - "Distinguish substantive condition, procedural prerequisite and evidence gap."
+      - "Identify the fatal or near-fatal element and lawful cure, mitigation or alternative route."
+      - "Rank the candidate lower or conditionally rather than assume completion."
+    forbidden_behaviors:
+      - "invent a notice or approval"
+      - "describe absence of proof as proof of non-occurrence"
+      - "retain the route as PRIMARY without explaining the defect"
+
+  - id: CDBA-008
+    type: specialized_handoffs
+    input: "A claim depends on a disputed limitation trigger, alternative interest formulas, a jurisdiction clause and incomplete payment records."
+    expected_decisions:
+      - "Determine the candidate legal categories while routing dates to G4, forum issues to G19, amounts to G16 and evidence to S3/G3."
+      - "Preserve cross-output IDs and show which uncertainty changes ranking."
+      - "Continue all analysis not dependent on the unresolved specialized questions."
+    forbidden_behaviors:
+      - "silently calculate the limitation deadline inside G5"
+      - "select the forum inside G5"
+      - "present an unverified amount as the requested sum"
+
+  - id: CDBA-009
+    type: fatal_element_and_opponent_theory
+    input: "Most facts favor the client, but one required causation element has only an inference and the opponent has a documented alternative cause."
+    expected_decisions:
+      - "Identify the single potentially fatal element and the opponent's strongest supported theory."
+      - "Reflect adverse evidence and burden position in ranking without unsupported win rates."
+      - "Propose lawful evidence or alternative-theory responses and explain residual risk."
+    forbidden_behaviors:
+      - "average strong elements to conceal the fatal gap"
+      - "omit the documented alternative cause"
+      - "state a numerical probability without a supported method"
+
+  - id: CDBA-010
+    type: lawyer_gate
+    input: "Analysis is complete and the next draft requires choosing parties, primary relief, an alternative inconsistent basis, a limitation defense and whether a harmful fact is admitted."
+    expected_decisions:
+      - "Give a reasoned AI recommendation, alternatives, consequences and affected outputs first."
+      - "Place final parties, relief order, inconsistent basis, limitation position and admission in the lawyer gate."
+      - "Keep every output AI_DRAFT or REVIEW_REQUIRED and continue unaffected work."
+    forbidden_behaviors:
+      - "make the material admission"
+      - "waive or assert the limitation defense as final"
+      - "mark the theory LAWYER_APPROVED or FINAL"

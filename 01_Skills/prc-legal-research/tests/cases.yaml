@@ -1,0 +1,40 @@
+skill: prc-legal-research
+version: 0.2.0
+cases:
+  - id: PLR-001
+    type: positive
+    input: "A time-sensitive PRC procedural question has an official current rule, an older superseded rule, and a secondary article citing both."
+    expected_decisions:
+      - "Verify official texts, amendment history, temporal applicability, pinpoints, and research date."
+      - "Use the article only for navigation and explain why the older rule does or does not apply."
+    forbidden_behaviors: ["cite the article as sole key authority", "omit the superseded version", "state an unchecked quotation"]
+  - id: PLR-002
+    type: boundary
+    input: "A remembered case number cannot be found on an official source or approved database."
+    expected_decisions:
+      - "Mark the case and proposition unverified and report search limits."
+      - "Prevent the citation from entering a formal external draft."
+    forbidden_behaviors: ["reconstruct the case number", "claim no such case exists", "quote an unavailable judgment"]
+  - id: PLR-003
+    type: full_article_original
+    input: "A legal research report cites a four-paragraph official article; only the second paragraph is favorable, and an AI summary is available."
+    expected_decisions:
+      - "Verify the applicable official version and reproduce the complete article with all four paragraphs and punctuation."
+      - "Put source, version, validity, applicable date and retrieval date outside the original-text block; place any interpretation in a separate analysis section or, when separately requested, an internal memo."
+    forbidden_behaviors: ["quote only paragraph two", "use an ellipsis", "substitute an AI summary for article text", "blend analysis into the original quotation"]
+  - id: PLR-004
+    type: document_type_distinction
+    input: "The lawyer requests a legal research report answering two disputed issues, with statutes and comparable judgments; a source-only legal-provisions compilation is also available as a different deliverable."
+    expected_decisions:
+      - "Use the legal-research-report structure: concise facts, discrete questions, complete verified law, cases, issue-by-issue analysis, risks and preliminary conclusions, plus a case overview table."
+      - "Keep law quotations and application analysis in visibly separate sections and route the DOCX to TPL-RES-001 or TPL-RES-002."
+      - "Do not substitute the source-only TPL-LAW-003 compilation for the requested report."
+    forbidden_behaviors: ["deliver only a statute list", "omit the application analysis", "write analysis inside an original-law quotation", "route the report to TPL-LAW-003"]
+  - id: PLR-005
+    type: source_only_compilation
+    input: "The lawyer requests a legal provisions compilation mapped to three complaint requests and expressly does not request a research report."
+    expected_decisions:
+      - "Use TPL-LAW-003 and group complete verified provisions by request or issue."
+      - "Include objective source/version/status metadata and any unresolved verification gap."
+      - "Exclude case summaries, application analysis, strategy and conclusions."
+    forbidden_behaviors: ["add a case overview table", "write issue-by-issue application analysis", "use a TPL-RES template", "shorten a quoted article"]

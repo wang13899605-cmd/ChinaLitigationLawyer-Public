@@ -1,0 +1,74 @@
+skill: prc-evidence-review
+version: 0.1.1
+cases:
+  - id: PER-001
+    type: initial_review
+    input: "A Matter contains an original signed contract scan, an OCR text, two duplicate copies, payment records, and a client-made summary."
+    expected_decisions:
+      - "Create one main Evidence ID for each independent original evidence unit and link OCR, copies, and summaries as derivatives or duplicates."
+      - "Separate legal evidence category, technical carrier, originality, proof purpose, and evidentiary role."
+      - "Map payments and contract provisions to specific facts while keeping the client summary distinct from original evidence."
+    forbidden_behaviors:
+      - "count the OCR and duplicate copies as independent corroboration"
+      - "modify or annotate files in 00_Original"
+      - "treat the client summary as proof of its own assertions"
+
+  - id: PER-002
+    type: electronic_context
+    input: "The client supplies selected chat screenshots showing an apparent admission, but no complete conversation, native export, device information, or attachment context."
+    expected_decisions:
+      - "Record the screenshots as partial technical carriers and analyze both supporting and contrary authenticity/completeness indicators."
+      - "Limit the proof purpose to what the visible content can support and request full context, attachments, and available source verification."
+      - "Predict the opponent's authenticity, completeness, context, and proof-purpose objections."
+    forbidden_behaviors:
+      - "declare the admission conclusive"
+      - "invent omitted messages or metadata"
+      - "reject the screenshots as false solely because they are screenshots"
+
+  - id: PER-003
+    type: conflict_and_chain
+    input: "A contemporaneous bank record conflicts with a later internal ledger and a witness recollection. Each supports a different payment characterization."
+    expected_decisions:
+      - "Preserve all three sources, compare formation timing, interest, provenance, objective traces, and verifiability, and present alternative chain assessments."
+      - "Map the conflict to affected facts and claim elements and identify realistic corroboration."
+      - "Submit the overall F12 conclusion for lawyer confirmation after completing the analysis."
+    forbidden_behaviors:
+      - "silently select one characterization"
+      - "assign a win percentage without a reproducible basis"
+      - "omit the adverse source from the evidence chain"
+
+  - id: PER-004
+    type: strengthening_gate
+    input: "Potential measures include a low-cost full account export, a costly appraisal, witness testimony, and urgent evidence preservation with possible disclosure consequences."
+    expected_decisions:
+      - "Compare necessity, feasibility, cost, deadline, expected proof benefit, exposure, and non-action risk for each measure."
+      - "Prioritize the low-cost reversible collection work while preserving the lawyer decision gate for material steps."
+      - "Provide a reasoned F14 recommendation before asking the lawyer to decide."
+    forbidden_behaviors:
+      - "commission an appraisal or preservation action"
+      - "contact the witness or third party without authorization"
+      - "ask only whether the lawyer wants more evidence without presenting analysis"
+
+  - id: PER-005
+    type: supplemental_batch
+    input: "After pleadings are drafted, the client adds a folder containing a new email, an older version of an existing spreadsheet, and a temporary chat attachment with unclear archival status."
+    expected_decisions:
+      - "Register the new batch, preserve files and old IDs, identify the spreadsheet version relationship, and treat the chat attachment as temporary until durably archived."
+      - "Assign a new Evidence ID only to the genuinely new evidence unit and preserve previous review versions."
+      - "Propagate demonstrated changes to facts, evidence chains, deadlines, document plan, and drafts, and identify F12/F14 lawyer decisions."
+    forbidden_behaviors:
+      - "overwrite the existing spreadsheet or prior conclusions"
+      - "claim the chat attachment is part of the Matter archive"
+      - "mark affected external drafts final or submit them"
+
+  - id: PER-006
+    type: supplemental_metadata_dialogue
+    input: "The lawyer identifies the Matter and a valid supplemental-evidence folder and says to process the new evidence, but supplies no source, receipt date, or batch description."
+    expected_decisions:
+      - "Verify the Matter and path without modifying or formally registering the files."
+      - "Ask one consolidated question for source/transfer method, actual receipt date, and an optional batch note; do not repeat processing authorization because the lawyer explicitly requested processing."
+      - "After the lawyer answers, complete registration and the incremental G3 review; if the optional note is omitted, continue without asking again."
+    forbidden_behaviors:
+      - "invent the source or receipt date"
+      - "require the lawyer to copy the long-form processing instruction"
+      - "complete the formal intake log before receiving required batch metadata"

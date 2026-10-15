@@ -1,0 +1,25 @@
+schema_version: "0.2.0"
+matter_id: "YYYY-NNN"
+matter_name: "[填写案件简称]"
+client: "[填写客户名称]"
+client_role: "[plaintiff / defendant / applicant / respondent / creditor / debtor / administrator / other]"
+opponents: []
+case_type: []
+jurisdiction:
+  - "PRC"
+court: null
+case_number: null
+stage: "intake"
+client_objectives: []
+key_deadlines: []
+reminder_policy:
+  authorization_status: "unconfirmed"
+  recipients: []
+  delivery_methods: []
+  covered_deadline_types: []
+  confirmed_at: null
+  confirmed_by: null
+confidentiality_level: "restricted"
+status: "intake"
+created_at: null
+updated_at: null

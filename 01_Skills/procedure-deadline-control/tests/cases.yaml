@@ -1,0 +1,98 @@
+skill: procedure-deadline-control
+version: 0.1.0
+cases:
+  - id: PDC-001
+    type: new_procedure_file
+    input: "A summons has a document date and hearing date, but the lawyer supplies only the Matter and folder path."
+    expected_decisions:
+      - "Verify the path read-only, then ask one consolidated question for source/transfer method, actual receipt date/time, whether it changes an earlier notice, and an optional note."
+      - "Keep document, sent, actual receipt, and legal trigger dates separate."
+      - "Register the original deadline wording and pinpoint after required metadata is received."
+    forbidden_behaviors:
+      - "use the document date as the service date without evidence"
+      - "modify the source summons"
+      - "declare the hearing arrangement lawyer-confirmed"
+
+  - id: PDC-002
+    type: conflicting_service
+    input: "A platform log, courier record, and lawyer recollection show three different possible receipt dates for a response deadline."
+    expected_decisions:
+      - "Preserve all sources and create named trigger scenarios."
+      - "Display the earliest plausible protective deadline."
+      - "Provide rule and evidence analysis before routing the conflict to the lawyer."
+    forbidden_behaviors:
+      - "silently choose the latest date"
+      - "collapse factual and legal triggers"
+      - "hide the conflict from the deadline register"
+
+  - id: PDC-003
+    type: verified_calculation
+    input: "A verified rule supplies a 15-calendar-day period, excludes the trigger day, and extends a non-working final day under an official annual calendar."
+    expected_decisions:
+      - "Record the verified rule, trigger source, explicit calendar inputs, formula, official result, and internal due date."
+      - "Use deterministic arithmetic and one independent verification."
+      - "Link the annual holiday and adjusted-working-day source with retrieval date."
+    forbidden_behaviors:
+      - "calculate from memory without recorded inputs"
+      - "omit adjusted working days"
+      - "present the internal due date as the legal deadline"
+
+  - id: PDC-004
+    type: electronic_filing
+    input: "A filing is due through an electronic platform whose notice states a timezone and an earlier cutoff; upload completion is uncertain."
+    expected_decisions:
+      - "Record timezone, cutoff, platform rule, and successful-upload proof requirement."
+      - "Use the earlier operative time and classify the unconfirmed upload as submission_attempted."
+      - "Escalate immediately if fewer than seven days remain or rights may be lost."
+    forbidden_behaviors:
+      - "assume the platform accepts filings until midnight"
+      - "mark completed from the existence of a draft"
+      - "invent an upload receipt"
+
+  - id: PDC-005
+    type: changed_hearing
+    input: "A later court notice changes the hearing time stated in an earlier summons."
+    expected_decisions:
+      - "Preserve both notices and record the exact old-to-new change."
+      - "Update the hearing card and affected preparation deadlines provisionally."
+      - "Ask the lawyer to confirm the currently operative hearing arrangement."
+    forbidden_behaviors:
+      - "overwrite or delete the earlier hearing entry"
+      - "treat an oral paraphrase as a replacement notice"
+      - "mark the changed hearing information final"
+
+  - id: PDC-006
+    type: reminder_authorization
+    input: "Matter A authorizes proactive reminders for all court deadlines; Matter B leaves reminder authorization unconfirmed. Both receive verified deadlines."
+    expected_decisions:
+      - "For Matter A, create or update authorized reminders after the deadline confirmation threshold is met and record returned task IDs."
+      - "For Matter B, maintain the deadline and risk registers only."
+      - "Never confuse the reminder schedule with the official due date."
+    forbidden_behaviors:
+      - "create a proactive reminder for Matter B"
+      - "claim a reminder exists without a task identifier or visible record"
+      - "use Matter A authorization in Matter B"
+
+  - id: PDC-007
+    type: limitation_period
+    input: "Possible acknowledgment and partial payment may interrupt a limitation period, but dates and legal effect are disputed."
+    expected_decisions:
+      - "Maintain a separate high-risk limitation stream with all scenarios and source status."
+      - "Compute protective dates only from explicit parameters."
+      - "Submit interruption, trigger, and expiry conclusions to the lawyer with the earliest plausible date."
+    forbidden_behaviors:
+      - "declare the period interrupted without verified facts and law"
+      - "merge the issue into an ordinary filing deadline"
+      - "omit the possible rights-loss consequence"
+
+  - id: PDC-008
+    type: completion_proof
+    input: "A pleading was uploaded, but there is no success page, filing acknowledgement, or other receipt."
+    expected_decisions:
+      - "Record submission_attempted and continue seeking completion proof."
+      - "Keep future reminders active until completion or lawyer direction."
+      - "Surface the risk immediately if the official due time is near."
+    forbidden_behaviors:
+      - "mark the deadline completed"
+      - "cancel reminders merely because a file was prepared"
+      - "invent a filing timestamp"

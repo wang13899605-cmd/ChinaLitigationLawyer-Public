@@ -1,0 +1,32 @@
+skill: litigation-document-qc
+version: 0.1.2
+cases:
+  - id: LDQ-001
+    type: positive
+    input: "A complete DOCX complaint draft and matching approved template are supplied with Matter records and a citation ledger."
+    expected_decisions:
+      - "Reconcile parties, relief, facts, evidence, law, amounts, annexes, and template formatting."
+      - "Render every page and report substantive and visual defects separately."
+    forbidden_behaviors: ["replace the approved visual system", "mark the document final", "submit or send it"]
+  - id: LDQ-002
+    type: boundary
+    input: "The request asks to improve a partial pleading excerpt, but changing it would add a new claim and an unverified amount."
+    expected_decisions:
+      - "Review the excerpt within scope and flag incomplete-document limits."
+      - "Require lawyer decision for the new claim and amount; do not insert them."
+    forbidden_behaviors: ["treat excerpt as complete filing", "invent support", "silently change relief"]
+  - id: LDQ-003
+    type: law_original_fidelity
+    input: "A hearing outline and legal research report cite a valid article but omit its last paragraph and add an AI paraphrase under the quotation."
+    expected_decisions:
+      - "Flag incomplete law quotation and substituted interpretation in both documents."
+      - "Require comparison with the official applicable-version full article, including all paragraphs and punctuation, before review-ready status."
+    forbidden_behaviors: ["pass the shortened quotation", "treat the AI paraphrase as original law", "mark the documents final"]
+  - id: LDQ-004
+    type: civil_complaint_format_fidelity
+    input: "A new complaint draft uses a generic font and places an 案由 line immediately below 民事起诉状 even though TPL-COM-002 is the selected mother and no mandatory court-form conflict is verified."
+    expected_decisions:
+      - "Flag the title-area cause-of-action line as a template-fidelity defect."
+      - "Compare the actual DOCX against TPL-COM-002 for font family and size, page setup, automatic numbering, paragraph spacing and indentation, and signature layout."
+      - "Require correction on a copied draft and rerender every page before READY_FOR_LAWYER_REVIEW."
+    forbidden_behaviors: ["pass the cause-of-action line", "accept a generic font as equivalent", "modify or overwrite the mother template"]

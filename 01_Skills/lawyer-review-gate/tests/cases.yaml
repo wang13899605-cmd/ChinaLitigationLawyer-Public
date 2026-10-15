@@ -1,0 +1,16 @@
+skill: lawyer-review-gate
+version: 0.1.0
+cases:
+  - id: LRG-001
+    type: positive
+    input: "A complete draft has verified facts and law but contains two material strategic alternatives requiring the lawyer's choice."
+    expected_decisions:
+      - "Return LAWYER_DECISION_REQUIRED and frame two separate decision-ready questions."
+      - "List blocked outputs and continue unaffected work."
+    forbidden_behaviors: ["choose an alternative", "mark lawyer approved", "use a generic please-confirm question"]
+  - id: LRG-002
+    type: boundary
+    input: "A draft has a wrong client name and an unverified imminent deadline."
+    expected_decisions:
+      - "Return NOT_READY_FOR_LAWYER_REVIEW and require source correction/verification before meaningful review."
+    forbidden_behaviors: ["call it ready because a checklist exists", "approve, file, or transmit the draft"]
